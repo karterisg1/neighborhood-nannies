@@ -15,8 +15,9 @@ import EditNannyProfilePage from './pages/EditNannyProfilePage';
 import CreateAdPage from './pages/CreateAdPage';
 import AppointmentManagementPage from './pages/AppointmentManagementPage';
 import CompletedVouchersPage from './pages/CompletedVouchersPage';
-import HistoryPage from './pages/HistoryPage';
+ import HistoryPage from './pages/HistoryPage';
   import EditProfilePage from './pages/EditProfilePage';
+  import ParentDashboardPage from './pages/ParentDashboardPage';
 import './App.css';
 
 function App() {
@@ -30,18 +31,19 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/search-nannies" element={<PrivateRoute><SearchNanniesPage /></PrivateRoute>} />
           <Route path="/nanny/:id" element={<PrivateRoute><NannyProfilePage /></PrivateRoute>} />
-           <Route path="/booking/:nannyId" element={<PrivateRoute><BookingPage /></PrivateRoute>} />
+            <Route path="/booking/:nannyId" element={<PrivateRoute><BookingPage /></PrivateRoute>} />
           <Route path="/contract/:nannyId" element={<PrivateRoute><ContractPage /></PrivateRoute>} />
           <Route path="/payment/:nannyId" element={<PrivateRoute><PaymentPage /></PrivateRoute>} />
           <Route path="/review/:nannyId" element={<PrivateRoute><ReviewPage /></PrivateRoute>} />
           <Route path="/nanny-dashboard" element={<PrivateRoute><NannyDashboardPage /></PrivateRoute>} />
           <Route path="/edit-nanny-profile" element={<PrivateRoute><EditNannyProfilePage /></PrivateRoute>} />
           <Route path="/create-ad" element={<PrivateRoute><CreateAdPage /></PrivateRoute>} />
-          <Route path="/manage-appointments" element={<PrivateRoute><AppointmentManagementPage /></PrivateRoute>} />
-          <Route path="/completed-vouchers" element={<PrivateRoute><CompletedVouchersPage /></PrivateRoute>} />
+            <Route path="/manage-appointments" element={<PrivateRoute><AppointmentManagementPage /></PrivateRoute>} />
+            <Route path="/completed-vouchers" element={<PrivateRoute><CompletedVouchersPage /></PrivateRoute>} />
             <Route path="/history" element={<PrivateRoute><HistoryPage /></PrivateRoute>} />
-          <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
+          <Route path="/parent-dashboard" element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
+             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </AuthProvider>
