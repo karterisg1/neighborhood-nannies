@@ -17,18 +17,19 @@ function RegistrationPage() {
     e.preventDefault();
     if (password !== confirmPassword) {
         setError("Οι κωδικοί δεν ταιριάζουν.");
-        return;
+      return;
     }
       const { user, error } = await register(email, password, firstName, lastName);
     if (user) {
-       navigate('/search-nannies');
+      navigate('/search-nannies');
     } else if (error) {
       setError(error);
     }
   };
-  const handleTaxisnetRegister = () => {
-      window.location.href = '/taxisnet/register'; // Backend endpoint for Taxisnet
-  }
+
+   const handleTaxisnetRegister = () => {
+         window.location.href = 'https://www1.gsis.gr/taxisnet/mytaxisnet';  // Replace with the actual TaxisNet register URL
+  };
 
   return (
     <div className="registration-page">

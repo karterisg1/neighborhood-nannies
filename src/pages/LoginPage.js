@@ -13,18 +13,16 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     const { user, error } = await login(email, password);
-    if(user){
-        navigate('/search-nannies');
-    }
-    else if (error){
-        setError(error);
+    if (user) {
+      navigate('/search-nannies');
+    } else if (error) {
+      setError(error);
     }
   };
 
-  const handleTaxisnetLogin = () => {
-    window.location.href = '/taxisnet/login'; // Backend endpoint for Taxisnet
+   const handleTaxisnetLogin = () => {
+         window.location.href = 'https://www1.gsis.gr/taxisnet/mytaxisnet'; // Replace with the actual TaxisNet login URL
   };
-
     return (
     <div className="login-page">
             <div className="login-form">
