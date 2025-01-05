@@ -1,0 +1,58 @@
+.contract-page {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+     width: 80%;
+}
+
+.contract-page h2{
+    margin-bottom: 20px;
+}
+.calendar-wrapper{
+    margin-bottom: 20px;
+}
+.calendar-wrapper h3{
+     margin-bottom: 10px;
+}
+.calendar-container{
+    display: flex;
+    gap: 20px;
+}
+.contract-text-container{
+   margin-bottom: 20px;
+}
+.contract-text-container textarea{
+  width: 100%;
+  min-height: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+.agreement-container {
+    margin-bottom: 20px;
+     display: flex;
+  flex-direction: column;
+    align-items: flex-start;
+}
+.agreement-container label{
+    margin-bottom: 5px;
+}
+
+.submit-contract-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit-contract-button:hover {
+    background-color: #218838;
+}

@@ -1,0 +1,76 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.login-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+.google-login-button{
+   background-color: #4285f4;
+  color: #fff;
+  border: none;
+ padding: 10px 15px;
+ border-radius: 5px;
+  cursor: pointer;
+   transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+.google-login-button:hover{
+     background-color: #357ae8;
+}
+.login-footer{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+.login-footer a{
+    text-decoration: none;
+    color: #007bff;
+}

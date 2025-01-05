@@ -1,0 +1,39 @@
+.navbar {
+    background-color: #343a40;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.navbar-brand a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.navbar-links a,
+.navbar-links button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.navbar-links button:hover,
+.navbar-links a:hover {
+    color: #ddd;
+}
+.user-name{
+  margin-right: 10px;
+}

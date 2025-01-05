@@ -1,0 +1,73 @@
+.home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    text-align: center;
+    background-color: white;
+}
+
+.home-logo{
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.header-text{
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+.main-text{
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.sections-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.home-section {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    width: 40%;
+    text-align: left;
+}
+.section-header{
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.home-section ul{
+   list-style-type: none;
+   padding-left: 10px;
+}
+
+.home-section ul li {
+    margin-bottom: 5px;
+}
+
+.home-buttons{
+    display: flex;
+    gap: 20px;
+}
+
+.register-button,
+.login-button {
+    padding: 15px 25px;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover,
+.login-button:hover {
+    background-color: #0056b3;
+}

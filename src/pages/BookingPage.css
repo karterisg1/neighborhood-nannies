@@ -1,0 +1,56 @@
+.booking-page {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+}
+
+.booking-page h2{
+    margin-bottom: 20px;
+}
+.time-selection{
+    margin-bottom: 20px;
+}
+.time-selection h3{
+   margin-bottom: 10px;
+}
+.time-selection .time-button {
+   background-color: #f0f0f0;
+  border: none;
+    padding: 8px 12px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.time-selection .time-button.active,
+.time-selection .time-button:hover{
+     background-color: #ddd;
+}
+.type-selection{
+    margin-bottom: 20px;
+}
+.type-selection h3{
+   margin-bottom: 10px;
+}
+.type-selection label {
+    margin-right: 20px;
+}
+
+.book-appointment-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.book-appointment-button:hover {
+    background-color: #218838;
+}
