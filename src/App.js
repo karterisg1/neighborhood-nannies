@@ -18,6 +18,9 @@ import CompletedVouchersPage from './pages/CompletedVouchersPage';
  import HistoryPage from './pages/HistoryPage';
   import EditProfilePage from './pages/EditProfilePage';
   import ParentDashboardPage from './pages/ParentDashboardPage';
+import FAQPage from './pages/FAQPage';
+  import AboutUsPage from './pages/AboutUsPage';
+  import ContactUsPage from './pages/ContactUsPage';
 import './App.css';
 
 function App() {
@@ -41,9 +44,12 @@ function App() {
             <Route path="/manage-appointments" element={<PrivateRoute><AppointmentManagementPage /></PrivateRoute>} />
             <Route path="/completed-vouchers" element={<PrivateRoute><CompletedVouchersPage /></PrivateRoute>} />
             <Route path="/history" element={<PrivateRoute><HistoryPage /></PrivateRoute>} />
-            <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
-          <Route path="/parent-dashboard" element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
-             <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
+           <Route path="/parent-dashboard" element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
+         <Route path="/faq" element={<FAQPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+           <Route path="/contact" element={<ContactUsPage />} />
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </AuthProvider>
