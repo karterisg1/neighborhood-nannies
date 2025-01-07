@@ -8,16 +8,21 @@ import Navbar from '../components/Navbar';
 function AppointmentManagementPage() {
    const [appointments, setAppointments] = useState([]);
     const [error, setError] = useState('');
+     const [filterStatus, setFilterStatus] = useState('pending');
     const {currentUser} = useContext(AuthContext);
 
 
     useEffect(() => {
         fetchAppointments();
-    }, []);
+    }, [filterStatus]);
 
   const fetchAppointments = async () => {
       try {
-        const querySnapshot = await getDocs(query(collection(db, 'appointments'), where('nannyId', '==', currentUser.uid)));
+        let q = query(collection(db, 'appointments'), where('nannyId', '==', currentUser.uid))
+         if (filterStatus !== 'all'){
+           q = query(q, where('status', '==', filterStatus))
+        }
+         const querySnapshot = await getDocs(q);
          const appointmentData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
           setAppointments(appointmentData);
         }
@@ -25,6 +30,10 @@ function AppointmentManagementPage() {
           console.error('Error fetching appointments', error);
          setError('Failed to load appointments. Please try again later.');
         }
+    }
+
+     const handleFilterChange = (e) => {
+        setFilterStatus(e.target.value);
     }
 
 
@@ -71,6 +80,15 @@ function AppointmentManagementPage() {
             <Navbar />
         <div className="appointment-management-page">
              <h2>Διαχείριση Ραντεβού</h2>
+              <div className="filter-section">
+                <label htmlFor='statusFilter'>Φίλτρο Κατάστασης:</label>
+                <select id='statusFilter' value={filterStatus} onChange={handleFilterChange}>
+                   <option value='all'>Όλα</option>
+                  <option value='pending'>Σε Εκκρεμότητα</option>
+                  <option value='confirmed'>Επιβεβαιωμένο</option>
+                 <option value='rejected'>Απορριφθηκε</option>
+               </select>
+              </div>
               {appointments.length === 0 ? (
                  <p>Δεν υπάρχουν προγραμματισμένα ραντεβού</p>
               ) : (
