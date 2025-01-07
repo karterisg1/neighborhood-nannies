@@ -49,6 +49,7 @@ function NannyProfilePage() {
         <p><strong>Εμπειρία:</strong> {nanny.experience}</p>
         <p><strong>Σπουδές:</strong> {nanny.studies}</p>
         <p><strong>Φύλο:</strong> {nanny.gender}</p>
+           {nanny.recommendationURL && <p><a href={nanny.recommendationURL} target='_blank' rel="noopener noreferrer">View Recommendation</a></p>}
       </div>
       <div className="profile-buttons">
           <Link to={`/booking/${id}`} className="book-button">Προγραμματισμός Ραντεβού</Link>
