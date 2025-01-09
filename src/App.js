@@ -15,12 +15,15 @@ import EditNannyProfilePage from './pages/EditNannyProfilePage';
 import CreateAdPage from './pages/CreateAdPage';
 import AppointmentManagementPage from './pages/AppointmentManagementPage';
 import CompletedVouchersPage from './pages/CompletedVouchersPage';
- import HistoryPage from './pages/HistoryPage';
-  import EditProfilePage from './pages/EditProfilePage';
-  import ParentDashboardPage from './pages/ParentDashboardPage';
+import HistoryPage from './pages/HistoryPage';
+import EditProfilePage from './pages/EditProfilePage';
+import ParentDashboardPage from './pages/ParentDashboardPage';
 import FAQPage from './pages/FAQPage';
-  import AboutUsPage from './pages/AboutUsPage';
-  import ContactUsPage from './pages/ContactUsPage';
+import AboutUsPage from './pages/AboutUsPage';
+import ContactUsPage from './pages/ContactUsPage';
+import EligibilityPage from './pages/EligibilityPage';
+
+
 import './App.css';
 
 function App() {
@@ -46,6 +49,7 @@ function App() {
             <Route path="/history" element={<PrivateRoute><HistoryPage /></PrivateRoute>} />
           <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
            <Route path="/parent-dashboard" element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
+           <Route path='/eligibility' element={<EligibilityPage />} />
          <Route path="/faq" element={<FAQPage />} />
           <Route path="/about" element={<AboutUsPage />} />
            <Route path="/contact" element={<ContactUsPage />} />
