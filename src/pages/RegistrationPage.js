@@ -16,7 +16,7 @@ function RegistrationPage() {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-        setError("Οι κωδικοί δεν ταιριάζουν..");
+        setError("Οι κωδικοί δεν ταιριάζουν.");
       return;
     }
       const { user, error } = await register(email, password, firstName, lastName);
