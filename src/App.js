@@ -22,6 +22,7 @@ import FAQPage from './pages/FAQPage';
 import AboutUsPage from './pages/AboutUsPage';
 import ContactUsPage from './pages/ContactUsPage';
 import EligibilityPage from './pages/EligibilityPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 
 
 import './App.css';
@@ -51,6 +52,7 @@ function App() {
            <Route path="/parent-dashboard" element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
            <Route path='/eligibility' element={<EligibilityPage />} />
          <Route path="/faq" element={<FAQPage />} />
+         <Route path='/reset-password' element={<PasswordResetPage />} />
           <Route path="/about" element={<AboutUsPage />} />
            <Route path="/contact" element={<ContactUsPage />} />
             <Route path="*" element={<Navigate to="/" />} />
