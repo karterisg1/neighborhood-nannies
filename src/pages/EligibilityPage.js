@@ -7,28 +7,28 @@ function EligibilityPage() {
       <>
           <Navbar />
     <div className="eligibility-page">
-      <h2>Eligibility Criteria</h2>
+      <h2>Κριτήρια Επιλεξιμότητας</h2>
 
       <div className="criteria-section">
-        <h3>For Parents/Guardians:</h3>
+        <h3>Για Γονείς/Κηδεμόνες:</h3>
         <ul>
-          <li>Must be a legal guardian or parent of a child in need of care.</li>
-          <li>Must agree to the terms of the platform.</li>
-          <li>Must be able to pay for the services (through vouchers, as implemented in our case).</li>
-            <li>Must have registered an account.</li>
+          <li>Πρέπει να είναι νόμιμος κηδεμόνας ή γονέας ενός παιδιού που χρειάζεται φροντίδα.</li>
+          <li>Πρέπει να συμφωνεί με τους όρους της πλατφόρμας.</li>
+          <li>Πρέπει να είναι σε θέση να πληρώσει για τις υπηρεσίες (μέσω κουπονιών, όπως εφαρμόζεται στην περίπτωσή μας).</li>
+          <li>Πρέπει να έχει δημιουργήσει λογαριασμό.</li>
         </ul>
       </div>
 
       <div className="criteria-section">
-        <h3>For Nannies/Professionals:</h3>
+        <h3>Για Νταντάδες/Επαγγελματίες:</h3>
         <ul>
-          <li>Must be over 18 years old.</li>
-          <li>Must possess qualifications or experience in childcare.</li>
-          <li>Must agree to the terms of the platform.</li>
-            <li>Must be a registered user.</li>
+          <li>Πρέπει να είναι άνω των 18 ετών.</li>
+          <li>Πρέπει να διαθέτει προσόντα ή εμπειρία στη φροντίδα παιδιών.</li>
+          <li>Πρέπει να συμφωνεί με τους όρους της πλατφόρμας.</li>
+          <li>Πρέπει να είναι εγγεγραμμένος χρήστης.</li>
         </ul>
       </div>
-        <p>If you meet the eligibility requirements, you can proceed to register.</p>
+        <p>Εάν πληροίτε τις απαιτήσεις επιλεξιμότητας, μπορείτε να προχωρήσετε στην εγγραφή.</p>
     </div>
       </>
   );
