@@ -5,7 +5,6 @@ import { db } from '../firebase';
 import './NannyProfilePage.css';
 import Navbar from '../components/Navbar';
 
-
 function NannyProfilePage() {
     const { id } = useParams();
     const [nanny, setNanny] = useState(null);
@@ -49,11 +48,12 @@ function NannyProfilePage() {
         <p><strong>Εμπειρία:</strong> {nanny.experience}</p>
         <p><strong>Σπουδές:</strong> {nanny.studies}</p>
         <p><strong>Φύλο:</strong> {nanny.gender}</p>
-           {nanny.recommendationURL && <p><a href={nanny.recommendationURL} target='_blank' rel="noopener noreferrer">View Recommendation</a></p>}
+            {nanny.recommendationURL && <p><a href={nanny.recommendationURL} target='_blank' rel="noopener noreferrer">View Recommendation</a></p>}
       </div>
       <div className="profile-buttons">
           <Link to={`/booking/${id}`} className="book-button">Προγραμματισμός Ραντεβού</Link>
-         <Link to={`/contract/${id}`} className='contract-button'>Αίτηση Συνεργασίας</Link>
+          <Link to={`/contract/${id}`} className='contract-button'>Αίτηση Συνεργασίας</Link>
+           <Link to={`/nanny/${id}/full-profile`} className='full-profile-button'>Full Profile</Link>
       </div>
     </div>
     </>

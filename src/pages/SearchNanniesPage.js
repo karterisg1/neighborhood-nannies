@@ -5,7 +5,6 @@ import './SearchNanniesPage.css';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 
-
 function SearchNanniesPage() {
     const [nannies, setNannies] = useState([]);
     const [filters, setFilters] = useState({
@@ -87,6 +86,7 @@ function SearchNanniesPage() {
                <option value="ΠΛΗΡΗΣ">ΠΛΗΡΗΣ</option>
              <option value="ΜΕΡΙΚΗ">ΜΕΡΙΚΗ</option>
            </select>
+           <Link to="/search/advanced" className="advanced-search-button">Advanced Search</Link>
         </div>
        <div className="search-results">
             {nannies.length === 0 ? (
@@ -97,7 +97,7 @@ function SearchNanniesPage() {
                        <h3>{nanny.name}</h3>
                        <p><strong>Εμπειρία:</strong> {nanny.experience}</p>
                         <p><strong>Ειδικότητες:</strong> {nanny.specialties}</p>
-                        <Link to={`/nanny-profile/${nanny.id}`} className='view-profile-button'>Προφίλ</Link>
+                        <Link to={`/nanny/${nanny.id}`} className='view-profile-button'>Προφίλ</Link>
                     </div>
                ))
            )}

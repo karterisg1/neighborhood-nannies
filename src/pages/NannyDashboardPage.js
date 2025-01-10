@@ -59,9 +59,12 @@ function NannyDashboardPage() {
       <h2>Καλώς Ήρθες {nanny.name}</h2>
         <div className="dashboard-buttons">
         <Link to='/edit-nanny-profile' className='edit-profile-button'>Επεξεργασία Προφίλ</Link>
+         <Link to='/upload-legal-doc' className='upload-legal-button'>Upload Legal Docs</Link>
         <Link to='/create-ad' className='create-ad-button'>Δημιουργία Αγγελίας</Link>
+         <Link to='/nanny/manage-ads' className='manage-ads-button'>Manage Ads</Link>
         <Link to='/manage-appointments' className='manage-appointments-button'>Διαχείριση Ραντεβού</Link>
-         </div>
+         <Link to='/schedule' className='schedule-button'>Manage Schedule</Link>
+        </div>
 
         <div className="ads-section">
         <h3>Οι Αγγελίες Μου</h3>
