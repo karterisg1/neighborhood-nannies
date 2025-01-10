@@ -3,26 +3,37 @@ import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
 import './LoginPage.css';
 
+
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const { user, error } = await login(email, password);
-    if (user) {
-      navigate('/search-nannies');
-    } else if (error) {
-      setError(error);
-    }
-  };
 
-   const handleTaxisnetLogin = () => {
-         window.location.href = 'https://www1.gsis.gr/taxisnet/mytaxisnet'; // Replace with the actual TaxisNet login URL
-  };
+    const handleLogin = async (e) => {
+        e.preventDefault();
+         const { user, error } = await login(email, password);
+        if(user){
+            if(user.role === 'parent'){
+                navigate('/search-nannies');
+            }
+            else {
+                navigate('/nanny-dashboard');
+            }
+
+        }
+        else if(error){
+           setError(error);
+        }
+    };
+      const handleTaxisnetLogin = () => {
+          //Redirect to Taxisnet authentication here
+          window.location.href = 'YOUR_TAXISNET_LOGIN_URL'; // Replace with your actual TaxisNet URL
+      };
+
+
     return (
     <div className="login-page">
             <div className="login-form">
@@ -38,7 +49,7 @@ function LoginPage() {
                          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                    </div>
                     <button type="submit" className="login-button">Είσοδος</button>
-                     <button type="button" onClick={handleTaxisnetLogin} className="taxisnet-login-button">Είσοδος με TaxisNet</button>
+                    <button type="button" onClick={handleTaxisnetLogin} className="taxisnet-login-button">Είσοδος με TaxisNet</button>
                      <div className="login-footer">
                          <Link to="/register">Εγγραφή</Link>
                           <Link to="/reset-password">Ξέχασα τον κωδικό</Link>

@@ -9,6 +9,7 @@ function RegistrationPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('parent'); // Default role parent
     const [error, setError] = useState(null);
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -19,17 +20,26 @@ function RegistrationPage() {
         setError("Οι κωδικοί δεν ταιριάζουν.");
       return;
     }
-      const { user, error } = await register(email, password, firstName, lastName);
+      const { user, error } = await register(email, password, firstName, lastName, role);
     if (user) {
-      navigate('/search-nannies');
+        if(role === 'parent'){
+            navigate('/search-nannies');
+        }
+        else {
+            navigate('/nanny-dashboard');
+        }
     } else if (error) {
       setError(error);
     }
   };
+ const handleTaxisnetRegister = () => {
+      //Redirect to Taxisnet registration
+      window.location.href = 'YOUR_TAXISNET_LOGIN_URL'; // Replace with your actual TaxisNet URL
+  }
 
-   const handleTaxisnetRegister = () => {
-         window.location.href = 'https://www1.gsis.gr/taxisnet/mytaxisnet';  // Replace with the actual TaxisNet register URL
-  };
+    const handleRoleChange = (e) => {
+        setRole(e.target.value);
+    }
 
   return (
     <div className="registration-page">
@@ -56,7 +66,14 @@ function RegistrationPage() {
             <div className="form-group">
               <label htmlFor="confirmPassword">Επιβεβαίωση Κωδικού</label>
               <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-          </div>
+            </div>
+           <div className="form-group">
+              <label htmlFor='role'>Είμαι</label>
+               <select id='role' value={role} onChange={handleRoleChange}>
+                  <option value='parent'>Γονέας</option>
+                   <option value='nanny'>Νταντά/Επιμελητής</option>
+               </select>
+            </div>
             <button type="submit" className="register-button">Ολοκλήρωση Εγγραφής</button>
             <button type="button" onClick={handleTaxisnetRegister} className="taxisnet-register-button">Εγγραφή με TaxisNet</button>
             <div className="register-footer">
