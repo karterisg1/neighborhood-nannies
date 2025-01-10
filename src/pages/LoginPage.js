@@ -30,7 +30,7 @@ function LoginPage() {
     };
       const handleTaxisnetLogin = () => {
           //Redirect to Taxisnet authentication here
-          window.location.href = 'YOUR_TAXISNET_LOGIN_URL'; // Replace with your actual TaxisNet URL
+          window.location.href = 'https://login.gsis.gr/mylogin/login.jsp?bmctx=1DB55AB50C08F2B418903DE4EB7466AD47038BC455E39B9EA82B1EB28CE52BC6&contextType=external&username=string&password=secure_string&challenge_url=https%3A%2F%2Flogin.gsis.gr%2Fmylogin%2Flogin.jsp&ssoCookie=disablehttponly&request_id=-5842705815979373440&authn_try_count=0&locale=en_US&resource_url=https%253A%252F%252Fwww1.gsis.gr%252Ftaxisnet%252Fmytaxisnet%252Fprotected%252Fauthorizations.htm'; // Replace with your actual TaxisNet URL
       };
 
 
