@@ -5,8 +5,10 @@ import './SearchNanniesPage.css';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 
+
 function SearchNanniesPage() {
     const [nannies, setNannies] = useState([]);
+     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({
         location: '',
         experience: '',
@@ -21,6 +23,7 @@ function SearchNanniesPage() {
     }, [filters]);
 
     const fetchNannies = async () => {
+          setLoading(true);
         try {
             let q = query(collection(db, 'nannies'));
 
@@ -39,10 +42,12 @@ function SearchNanniesPage() {
             const querySnapshot = await getDocs(q);
             const nanniesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setNannies(nanniesData);
+              setLoading(false);
         }
         catch (error) {
             console.error('Error fetching nannies:', error);
             setError('Failed to load nannies. Please try again later.');
+              setLoading(false);
         }
     };
       const handleFilterChange = (e) => {
@@ -55,6 +60,9 @@ function SearchNanniesPage() {
     if (error){
       return <p className="error-message">{error}</p>;
     }
+  if (loading) {
+      return <p>Loading nannies...</p>;
+  }
     return (
         <>
         <Navbar />
@@ -86,12 +94,10 @@ function SearchNanniesPage() {
                <option value="ΠΛΗΡΗΣ">ΠΛΗΡΗΣ</option>
              <option value="ΜΕΡΙΚΗ">ΜΕΡΙΚΗ</option>
            </select>
-           <Link to="/search/advanced" className="advanced-search-button">Advanced Search</Link>
+            <Link to="/search/advanced" className="advanced-search-button">Advanced Search</Link>
         </div>
        <div className="search-results">
-            {nannies.length === 0 ? (
-                <p>Δεν βρέθηκαν νταντάδες με αυτά τα κριτήρια.</p>
-             ) : (
+            {nannies && nannies.length > 0 ? (
                 nannies.map(nanny => (
                   <div key={nanny.id} className="nanny-card">
                        <h3>{nanny.name}</h3>
@@ -100,7 +106,9 @@ function SearchNanniesPage() {
                         <Link to={`/nanny/${nanny.id}`} className='view-profile-button'>Προφίλ</Link>
                     </div>
                ))
-           )}
+           ) : (
+               <p>Δεν βρέθηκαν νταντάδες με αυτά τα κριτήρια.</p>
+            )}
       </div>
   </div>
     </>

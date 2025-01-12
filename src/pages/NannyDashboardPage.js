@@ -14,7 +14,7 @@ function NannyDashboardPage() {
     const [loading, setLoading] = useState(true);
 
    useEffect(() => {
-       console.log('NannyDashboardPage: useEffect triggered');
+      console.log('NannyDashboardPage: useEffect triggered');
       fetchNanny();
       fetchAds();
     }, []);
