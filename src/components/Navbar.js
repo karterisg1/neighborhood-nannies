@@ -26,7 +26,7 @@ function Navbar() {
                  { currentUser?.email && currentUser?.email.includes('@gmail.com') ? <Link to='/parent-dashboard'>Dashboard</Link> : null}
              <Link to='/edit-profile'>Επεξεργασία Προφίλ</Link>
                <Link to="/history">Ιστορικό</Link>
-                <Link to='/vouchers'>Vouchers</Link>
+                <Link to='/completed-vouchers'>Vouchers</Link>
                  <Link to='/notifications'>Notifications</Link>
               <Link to='/help'>Help</Link>
                <button onClick={handleLogout}>Αποσύνδεση</button>
