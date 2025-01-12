@@ -13,11 +13,12 @@ function ReviewPage() {
     const [rating, setRating] = useState(0);
     const [error, setError] = useState('');
     const [showReviewForm, setShowReviewForm] = useState(false);
+    const [cooperation, setCooperation] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchNanny();
-      fetchReviewStatus();
+        fetchReviewStatus();
     }, [nannyId]);
 
      const fetchReviewStatus = async () => {
@@ -33,7 +34,7 @@ function ReviewPage() {
            }
           catch (error){
               console.error("Error fetching review status:", error);
-             setError("Failed to fetch review status, please try again");
+             setError("Failed to fetch review status, please try again later");
         }
      }
     const fetchNanny = async () => {
@@ -58,11 +59,26 @@ function ReviewPage() {
     const handleRatingChange = (newRating) => {
       setRating(newRating);
    };
+   const handleCooperationChange = (e) => {
+     setCooperation(e.target.value);
+   }
 
 
     const handleReviewSubmission = async () => {
-       if(rating === 0){
+       if(rating === 0 && showReviewForm){
             setError('Please select a star rating.');
+           return;
+       }
+       if(cooperation === "Ανανέωση Συνεργασίας"){
+            try {
+                  const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
+                 await updateDoc(contractRef, { status: 'pending' });
+                   navigate('/payment/' + nannyId);
+           }
+           catch(error){
+            console.error("Error updating the contract status:", error);
+             setError("Failed to update the contract status, please try again later");
+           }
            return;
        }
        try{
@@ -97,11 +113,11 @@ function ReviewPage() {
              <p>Θα θέλατε να ανανεώσετε την συνεργασία σας ή να την ολοκληρώσετε οριστικά;</p>
              <div className="review-radio">
                  <label>
-                  <input type='radio' name='cooperation' value='Ανανέωση Συνεργασίας'/>
+                  <input type='radio' name='cooperation' value='Ανανέωση Συνεργασίας' checked={cooperation === 'Ανανέωση Συνεργασίας'} onChange={handleCooperationChange}/>
                   Ανανέωση Συνεργασίας
                  </label>
                   <label>
-                  <input type='radio' name='cooperation' value='Οριστική Λήξη'/>
+                  <input type='radio' name='cooperation' value='Οριστική Λήξη' checked={cooperation === 'Οριστική Λήξη'} onChange={handleCooperationChange}/>
                    Οριστική Λήξη
                  </label>
            </div>
@@ -126,7 +142,7 @@ function ReviewPage() {
              </div>
           </div>
         ) : (
-           <p>You cannot review yet.</p>
+           <button onClick={handleReviewSubmission} className="submit-review-button">Υποβολή</button>
         )}
         </div>
     </>

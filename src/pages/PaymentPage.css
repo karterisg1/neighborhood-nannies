@@ -46,3 +46,30 @@
 .complete-payment-button:hover {
    background-color: #218838;
 }
+.certify-button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+   transition: background-color 0.3s ease;
+   margin-top: 10px;
+}
+.certify-button:hover{
+   background-color: #0056b3;
+}
+.go-history-button{
+    background-color: #dc3545;
+    color: white;
+     padding: 10px 15px;
+    border: none;
+   border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+     margin-left: 10px;
+     text-decoration: none;
+}
+.go-history-button:hover{
+  background-color: #c82333;
+}
