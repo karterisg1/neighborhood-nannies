@@ -13,12 +13,14 @@ function ReviewPage() {
     const [rating, setRating] = useState(0);
     const [error, setError] = useState('');
     const [showReviewForm, setShowReviewForm] = useState(false);
-    const [cooperation, setCooperation] = useState('');
+     const [contract, setContract] = useState(null);
+     const [cooperation, setCooperation] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchNanny();
-        fetchReviewStatus();
+      fetchReviewStatus();
+      fetchContract();
     }, [nannyId]);
 
      const fetchReviewStatus = async () => {
@@ -34,7 +36,7 @@ function ReviewPage() {
            }
           catch (error){
               console.error("Error fetching review status:", error);
-             setError("Failed to fetch review status, please try again later");
+             setError("Failed to fetch review status, please try again");
         }
      }
     const fetchNanny = async () => {
@@ -51,6 +53,21 @@ function ReviewPage() {
             setError('Failed to load nanny. Please try again later.');
         }
     };
+  const fetchContract = async () => {
+      try{
+          const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
+          const contractSnap = await getDoc(contractRef);
+           if(contractSnap.exists()){
+               setContract(contractSnap.data());
+           } else {
+               setError('Contract not found');
+           }
+      }
+     catch(error){
+         console.error("Error fetching contract", error)
+       setError("Failed to fetch contract, try again later");
+    }
+  };
 
     const handleReviewTextChange = (e) => {
         setReviewText(e.target.value);
@@ -59,9 +76,9 @@ function ReviewPage() {
     const handleRatingChange = (newRating) => {
       setRating(newRating);
    };
-   const handleCooperationChange = (e) => {
-     setCooperation(e.target.value);
-   }
+    const handleCooperationChange = (e) => {
+        setCooperation(e.target.value);
+    }
 
 
     const handleReviewSubmission = async () => {
@@ -73,7 +90,7 @@ function ReviewPage() {
             try {
                   const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
                  await updateDoc(contractRef, { status: 'pending' });
-                   navigate('/payment/' + nannyId);
+                  navigate('/payment/' + nannyId);
            }
            catch(error){
             console.error("Error updating the contract status:", error);
@@ -81,15 +98,16 @@ function ReviewPage() {
            }
            return;
        }
-       try{
-         const reviewsCollection = collection(db, 'reviews');
-         await addDoc(reviewsCollection, {
-             nannyId: nannyId,
-             userId: auth.currentUser.uid,
-             reviewText: reviewText,
-             rating: rating,
-             date: new Date().toISOString(),
-         });
+      try{
+        const reviewsCollection = collection(db, 'reviews');
+        await addDoc(reviewsCollection, {
+          nannyId: nannyId,
+          userId: auth.currentUser.uid,
+          reviewText: reviewText,
+          rating: rating,
+          date: new Date().toISOString(),
+          contractId: `${auth.currentUser.uid}-${nannyId}`
+          });
           navigate('/history');
         }
       catch (error){
