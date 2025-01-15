@@ -2,13 +2,16 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f0f4f7; /* Light Gray Background */
     color: #333;
 }
 
 .error-message {
-    color: red;
+    color: #dc3545; /* Red Error Color */
     margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8d7da; /* Light Red background */
+    border-radius: 5px;
 }
 
 button{
@@ -17,4 +20,18 @@ button{
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+}
+h2, h3 {
+    color: #0056b3; /* Dark Blue Titles */
+}
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+.success-message {
+    color: green;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #d4edda; /* Light Green background */
+    border-radius: 5px;
 }

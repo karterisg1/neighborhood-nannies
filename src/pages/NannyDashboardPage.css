@@ -8,6 +8,7 @@
 }
 .nanny-dashboard-page h2{
     margin-bottom: 20px;
+   color: #0056b3;
 }
 .dashboard-buttons{
    margin-bottom: 20px;
@@ -16,7 +17,10 @@
 }
 .edit-profile-button,
 .create-ad-button,
-.manage-appointments-button{
+.manage-appointments-button,
+ .upload-legal-button,
+  .manage-ads-button,
+  .schedule-button {
    display: inline-block;
   background-color: #007bff;
   color: white;
@@ -27,14 +31,17 @@
 }
 .edit-profile-button:hover,
 .create-ad-button:hover,
-.manage-appointments-button:hover{
+.manage-appointments-button:hover,
+  .upload-legal-button:hover,
+ .manage-ads-button:hover,
+    .schedule-button:hover {
      background-color: #0056b3;
 }
 .ads-section {
     margin-top: 20px;
 }
 .ads-section h3{
-   margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .ad-card {
     background-color: #f0f0f0;

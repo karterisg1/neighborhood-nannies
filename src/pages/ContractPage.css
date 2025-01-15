@@ -4,11 +4,11 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-     width: 80%;
+    width: 80%;
 }
-
-.contract-page h2{
+.contract-page h2 {
     margin-bottom: 20px;
+    color: #0056b3;
 }
 .calendar-wrapper{
     margin-bottom: 20px;
@@ -42,7 +42,8 @@
     margin-bottom: 5px;
 }
 
-.submit-contract-button {
+.submit-contract-button,
+.review-button {
     background-color: #28a745;
     color: white;
     border: none;
@@ -51,6 +52,13 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+}
+.review-button {
+     background-color: #007bff;
+     margin-left: 10px;
+}
+.review-button:hover{
+    background-color: #0056b3;
 }
 
 .submit-contract-button:hover {

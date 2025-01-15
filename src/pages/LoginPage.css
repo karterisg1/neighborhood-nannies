@@ -17,7 +17,7 @@
 
 .login-form h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #0056b3;
 }
 
 .form-group {
@@ -39,7 +39,8 @@
     box-sizing: border-box;
 }
 
-.login-button {
+.login-button,
+.taxisnet-login-button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -49,22 +50,18 @@
     transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
+.login-button:hover,
+.taxisnet-login-button:hover {
     background-color: #0056b3;
 }
-.google-login-button{
-   background-color: #4285f4;
-  color: #fff;
-  border: none;
- padding: 10px 15px;
- border-radius: 5px;
-  cursor: pointer;
-   transition: background-color 0.3s ease;
-    margin-top: 10px;
+.taxisnet-login-button {
+  margin-top: 10px;
+  background-color: #0099ff;
 }
-.google-login-button:hover{
-     background-color: #357ae8;
+.taxisnet-login-button:hover{
+      background-color: #007acc;
 }
+
 .login-footer{
     margin-top: 15px;
     display: flex;

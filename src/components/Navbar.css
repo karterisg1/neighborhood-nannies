@@ -1,25 +1,22 @@
 .navbar {
-    background-color: #343a40;
+    background-color: #0056b3; /* Dark Blue Header */
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
 }
-
 .navbar-brand a {
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
 }
-
 .navbar-links {
     display: flex;
     gap: 20px;
     align-items: center;
 }
-
 .navbar-links a,
 .navbar-links button {
     color: white;
@@ -35,5 +32,5 @@
     color: #ddd;
 }
 .user-name{
-  margin-right: 10px;
+    margin-right: 10px;
 }

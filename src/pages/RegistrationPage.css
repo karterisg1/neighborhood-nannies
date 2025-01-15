@@ -17,7 +17,7 @@
 
 .registration-form h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #0056b3;
 }
 
 .form-group {
@@ -31,7 +31,8 @@
     color: #555;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -39,7 +40,8 @@
     box-sizing: border-box;
 }
 
-.register-button {
+.register-button,
+.taxisnet-register-button{
     background-color: #28a745;
     color: #fff;
     border: none;
@@ -48,18 +50,11 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.google-register-button{
-    background-color: #4285f4;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
+.taxisnet-register-button{
+      background-color: #0099ff;
 }
-.google-register-button:hover{
-     background-color: #357ae8;
+.taxisnet-register-button:hover{
+     background-color: #007acc;
 }
 .register-button:hover {
     background-color: #218838;

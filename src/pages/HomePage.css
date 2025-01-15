@@ -15,10 +15,12 @@
 .header-text{
     margin-bottom: 15px;
     font-size: 2rem;
+    color: #0056b3;
 }
 .main-text{
     margin-bottom: 30px;
     font-size: 1.2rem;
+    color: #555;
 }
 
 .sections-wrapper {
@@ -30,7 +32,7 @@
 
 .home-section {
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #e9ecef;
     border-radius: 8px;
     width: 40%;
     text-align: left;
@@ -38,6 +40,7 @@
 .section-header{
     font-size: 1.5rem;
     margin-bottom: 10px;
+    color: #0056b3;
 }
 
 .home-section ul{

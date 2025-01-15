@@ -9,6 +9,7 @@
 
 .payment-page h2{
     margin-bottom: 20px;
+   color: #0056b3;
 }
 .payment-status-section{
     margin-bottom: 20px;
@@ -33,7 +34,9 @@
 .payment-info p{
     margin-bottom: 5px;
 }
-.complete-payment-button {
+.complete-payment-button,
+.go-history-button,
+.nanny-vouchers-button {
     background-color: #28a745;
     color: white;
    border: none;
@@ -41,35 +44,21 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-   margin-top: 10px;
+    margin-top: 10px;
 }
-.complete-payment-button:hover {
+.complete-payment-button:hover,
+.go-history-button:hover,
+.nanny-vouchers-button:hover {
    background-color: #218838;
 }
-.certify-button{
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-   transition: background-color 0.3s ease;
-   margin-top: 10px;
+.go-history-button {
+     background-color: #007bff;
+    margin-left: 20px;
 }
-.certify-button:hover{
-   background-color: #0056b3;
+.nanny-vouchers-button{
+  background-color: #0099ff;
+     margin-left: 20px;
 }
-.go-history-button{
-    background-color: #dc3545;
-    color: white;
-     padding: 10px 15px;
-    border: none;
-   border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-     margin-left: 10px;
-     text-decoration: none;
-}
-.go-history-button:hover{
-  background-color: #c82333;
+.nanny-vouchers-button:hover{
+     background-color: #007acc;
 }

@@ -1,35 +1,38 @@
 .nanny-profile-page {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    width: 80%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 80%;
 }
 .nanny-profile-page h2{
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  color: #0056b3;
 }
 .profile-info{
-   margin-bottom: 20px;
+ margin-bottom: 20px;
 }
 .profile-info p{
-  margin-bottom: 8px;
+margin-bottom: 8px;
 }
 .profile-buttons{
-     display: flex;
-     gap: 20px;
+   display: flex;
+   gap: 20px;
 }
 .book-button,
-.contract-button{
-  display: inline-block;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
- padding: 10px 15px;
-  border-radius: 4px;
-    transition: background-color 0.3s ease;
+.contract-button,
+.full-profile-button{
+display: inline-block;
+background-color: #007bff;
+color: white;
+text-decoration: none;
+padding: 10px 15px;
+border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 .book-button:hover,
-.contract-button:hover{
-  background-color: #0056b3;
+.contract-button:hover,
+.full-profile-button:hover{
+background-color: #0056b3;
 }
