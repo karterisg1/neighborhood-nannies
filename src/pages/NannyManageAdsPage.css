@@ -1,0 +1,43 @@
+.nanny-manage-ads-page {
+    padding: 20px;
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     margin: 20px auto;
+     width: 80%;
+ }
+ .nanny-manage-ads-page h2{
+   margin-bottom: 20px;
+ }
+ .ad-card{
+    background-color: #f0f0f0;
+    padding: 15px;
+     border-radius: 8px;
+   margin-bottom: 10px;
+ }
+ .ad-card p{
+   margin-bottom: 5px;
+ }
+ .ad-buttons{
+  display: flex;
+    justify-content: flex-end;
+ }
+ .delete-button{
+     background-color: #dc3545;
+     color: white;
+      padding: 10px 15px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+ .delete-button:hover{
+   background-color: #c82333;
+ }
+ .create-link{
+     margin-top: 20px;
+ }
+ .create-link a{
+   color: #007bff;
+     text-decoration: none;
+ }

@@ -1,0 +1,26 @@
+.contract-details-page {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+     width: 80%;
+}
+.contract-details-page h2{
+    margin-bottom: 20px;
+}
+.contract-info p{
+   margin-bottom: 10px;
+}
+.contract-text{
+     margin-top: 20px;
+}
+.contract-text textarea{
+ width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}

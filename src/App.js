@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
@@ -17,15 +17,33 @@ import AppointmentManagementPage from './pages/AppointmentManagementPage';
 import CompletedVouchersPage from './pages/CompletedVouchersPage';
 import HistoryPage from './pages/HistoryPage';
 import EditProfilePage from './pages/EditProfilePage';
-import ParentDashboardPage from './pages/ParentDashboardPage';
-import FAQPage from './pages/FAQPage';
-import AboutUsPage from './pages/AboutUsPage';
-import ContactUsPage from './pages/ContactUsPage';
 import EligibilityPage from './pages/EligibilityPage';
-import PasswordResetPage from './pages/PasswordResetPage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import FullNannyProfilePage from './pages/FullNannyProfilePage';
 import NotificationsPage from './pages/NotificationsPage';
-
-
+import AdminDashboardPage from './pages/AdminDashboardPage';
+import ParentDashboardPage from './pages/ParentDashboardPage';
+import NannyManageAdsPage from './pages/NannyManageAdsPage';
+import AdvancedSearchPage from './pages/AdvancedSearchPage';
+import ContractDetailsPage from './pages/ContractDetailsPage';
+import SchedulePage from './pages/SchedulePage';
+import InboxPage from './pages/InboxPage';
+import OutboxPage from './pages/OutboxPage';
+import ChatPage from './pages/ChatPage';
+import UploadLegalDocPage from './pages/UploadLegalDocPage';
+import OnboardingParentPage from './pages/OnboardingParentPage';
+import OnboardingNannyPage from './pages/OnboardingNannyPage';
+import VouchersPage from './pages/VouchersPage';
+import PaymentHistoryPage from './pages/PaymentHistoryPage';
+import BalancePage from './pages/BalancePage';
+import ReviewDetailsPage from './pages/ReviewDetailsPage';
+import RecommendationRequestPage from './pages/RecommendationRequestPage';
+import PasswordResetPage from './pages/PasswordResetPage';
+import SettingsPage from './pages/SettingsPage';
+import HelpPage from './pages/HelpPage';
+import AboutUsPage from './pages/AboutUsPage';
+import FAQPage from './pages/FAQPage';
+import NannyVoucherConfirmationPage from './pages/NannyVoucherConfirmationPage';
 import './App.css';
 
 function App() {
@@ -34,30 +52,50 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/search-nannies" element={<PrivateRoute><SearchNanniesPage /></PrivateRoute>} />
-          <Route path="/nanny/:id" element={<PrivateRoute><NannyProfilePage /></PrivateRoute>} />
-            <Route path="/booking/:nannyId" element={<PrivateRoute><BookingPage /></PrivateRoute>} />
-          <Route path="/contract/:nannyId" element={<PrivateRoute><ContractPage /></PrivateRoute>} />
-          <Route path="/payment/:nannyId" element={<PrivateRoute><PaymentPage /></PrivateRoute>} />
-          <Route path="/review/:nannyId" element={<PrivateRoute><ReviewPage /></PrivateRoute>} />
-          <Route path="/nanny-dashboard" element={<PrivateRoute><NannyDashboardPage /></PrivateRoute>} />
-          <Route path="/edit-nanny-profile" element={<PrivateRoute><EditNannyProfilePage /></PrivateRoute>} />
-          <Route path="/create-ad" element={<PrivateRoute><CreateAdPage /></PrivateRoute>} />
+           <Route path="/" element={<HomePage />} />
+           <Route path="/login" element={<LoginPage />} />
+           <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/search-nannies" element={<PrivateRoute><SearchNanniesPage /></PrivateRoute>} />
+            <Route path="/nanny/:id" element={<PrivateRoute><NannyProfilePage /></PrivateRoute>} />
+            <Route path="/nanny/:id/full-profile" element={<PrivateRoute><FullNannyProfilePage /></PrivateRoute>} />
+           <Route path="/booking/:nannyId" element={<PrivateRoute><BookingPage /></PrivateRoute>} />
+             <Route path="/contract/:nannyId" element={<PrivateRoute><ContractPage /></PrivateRoute>} />
+            <Route path="/payment/:nannyId" element={<PrivateRoute><PaymentPage /></PrivateRoute>} />
+           <Route path="/review/:nannyId" element={<PrivateRoute><ReviewPage /></PrivateRoute>} />
+            <Route path="/nanny-dashboard" element={<PrivateRoute><NannyDashboardPage /></PrivateRoute>} />
+             <Route path="/edit-nanny-profile" element={<PrivateRoute><EditNannyProfilePage /></PrivateRoute>} />
+           <Route path="/create-ad" element={<PrivateRoute><CreateAdPage /></PrivateRoute>} />
             <Route path="/manage-appointments" element={<PrivateRoute><AppointmentManagementPage /></PrivateRoute>} />
             <Route path="/completed-vouchers" element={<PrivateRoute><CompletedVouchersPage /></PrivateRoute>} />
-            <Route path="/history" element={<PrivateRoute><HistoryPage /></PrivateRoute>} />
-          <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
-           <Route path="/parent-dashboard" element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
-           <Route path='/eligibility' element={<EligibilityPage />} />
-         <Route path="/faq" element={<FAQPage />} />
-         <Route path='/notifications' element={<PrivateRoute><NotificationsPage /></PrivateRoute>} />
-         <Route path='/reset-password' element={<PasswordResetPage />} />
-          <Route path="/about" element={<AboutUsPage />} />
-           <Route path="/contact" element={<ContactUsPage />} />
-            <Route path="*" element={<Navigate to="/" />} />
+             <Route path="/history" element={<PrivateRoute><HistoryPage /></PrivateRoute>} />
+           <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
+            <Route path='/eligibility' element={<EligibilityPage />} />
+            <Route path='/how-it-works' element={<HowItWorksPage />} />
+             <Route path='/notifications' element={<PrivateRoute><NotificationsPage /></PrivateRoute>} />
+           <Route path='/admin-dashboard' element={<PrivateRoute><AdminDashboardPage /></PrivateRoute>} />
+             <Route path='/parent-dashboard' element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
+           <Route path='/nanny/manage-ads' element={<PrivateRoute><NannyManageAdsPage /></PrivateRoute>} />
+            <Route path='/search/advanced' element={<PrivateRoute><AdvancedSearchPage /></PrivateRoute>} />
+            <Route path='/contracts/:id/details' element={<PrivateRoute><ContractDetailsPage /></PrivateRoute>} />
+             <Route path='/schedule' element={<PrivateRoute><SchedulePage /></PrivateRoute>} />
+            <Route path='/messages/inbox' element={<PrivateRoute><InboxPage /></PrivateRoute>} />
+          <Route path='/messages/outbox' element={<PrivateRoute><OutboxPage /></PrivateRoute>} />
+            <Route path='/chat/:id' element={<PrivateRoute><ChatPage /></PrivateRoute>} />
+           <Route path='/upload-legal-doc' element={<PrivateRoute><UploadLegalDocPage /></PrivateRoute>} />
+          <Route path='/onboarding-parent' element={<OnboardingParentPage />} />
+           <Route path='/onboarding-nanny' element={<OnboardingNannyPage />} />
+         <Route path='/vouchers' element={<PrivateRoute><VouchersPage /></PrivateRoute>} />
+            <Route path='/payment-history' element={<PrivateRoute><PaymentHistoryPage /></PrivateRoute>} />
+            <Route path='/balance' element={<PrivateRoute><BalancePage /></PrivateRoute>} />
+          <Route path='/review/:id/details' element={<PrivateRoute><ReviewDetailsPage /></PrivateRoute>} />
+           <Route path='/recommendation-request/:nannyId' element={<PrivateRoute><RecommendationRequestPage /></PrivateRoute>} />
+            <Route path='/reset-password' element={<PasswordResetPage />} />
+            <Route path='/settings' element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
+          <Route path='/help' element={<HelpPage />} />
+         <Route path='/faq' element={<FAQPage />} />
+          <Route path='/about-us' element={<AboutUsPage />} />
+         <Route path='/nanny-vouchers' element={<PrivateRoute><NannyVoucherConfirmationPage /></PrivateRoute>}/>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </AuthProvider>
@@ -65,7 +103,8 @@ function App() {
 }
 
 function PrivateRoute({ children }) {
-  const { currentUser } = React.useContext(AuthContext);
-  return currentUser ? children : <Navigate to="/login" />;
+    const { currentUser } = React.useContext(AuthContext);
+    return currentUser ? children : <Navigate to="/login" />;
 }
+
 export default App;
