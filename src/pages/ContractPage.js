@@ -1,25 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase';
 import './ContractPage.css';
 import Navbar from '../components/Navbar';
 import Calendar from '../components/Calendar';
+import AuthContext from '../contexts/AuthContext';
 
 
 function ContractPage() {
     const { nannyId } = useParams();
-    const [nanny, setNanny] = useState(null);
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [error, setError] = useState('');
-    const [contractText, setContractText] = useState('');
-    const [agreement, setAgreement] = useState(false);
+   const [nanny, setNanny] = useState(null);
+    const [tempContract, setTempContract] = useState({
+        startDate: null,
+        endDate: null,
+        contractText: '',
+        agreement: false,
+       status: 'draft', //initial status of the contract
+   });
+  const [error, setError] = useState('');
+  const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
-
 
     useEffect(() => {
         fetchNanny();
+        fetchExistingContract();
     }, [nannyId]);
 
     const fetchNanny = async () => {
@@ -36,49 +41,96 @@ function ContractPage() {
           setError('Failed to load nanny. Please try again later.');
       }
     };
-     useEffect(() => {
-         if (nanny) {
-             setContractText(`Συμφωνητικό συνεργασίας μεταξύ του χρήστη ${auth.currentUser.displayName} και της νταντάς ${nanny.name} για το χρονικό διάστημα από ${startDate?.toLocaleDateString('el-GR')} έως ${endDate?.toLocaleDateString('el-GR')}`);
-         }
-    }, [nanny, startDate, endDate]);
+    const fetchExistingContract = async () => {
+        try{
+            const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
+            const contractSnap = await getDoc(contractRef);
+            if (contractSnap.exists()){
+                setTempContract({id: contractSnap.id, ...contractSnap.data()})
+           }
+       }
+      catch (error) {
+            console.log("Error getting contract: ", error);
+      }
+    };
 
-     const handleStartDateChange = (date) => {
-      setStartDate(date);
+    useEffect(() => {
+        if (nanny && tempContract.startDate && tempContract.endDate) {
+            setTempContract(prev => ({
+               ...prev,
+               contractText: `Συμφωνητικό συνεργασίας μεταξύ του χρήστη ${auth.currentUser.displayName} και της νταντάς ${nanny.name} για το χρονικό διάστημα από ${tempContract.startDate?.toLocaleDateString('el-GR')} έως ${tempContract.endDate?.toLocaleDateString('el-GR')}`
+           }));
+        }
+    }, [nanny, tempContract.startDate, tempContract.endDate]);
+
+
+    const handleStartDateChange = (date) => {
+         setTempContract(prev => ({ ...prev, startDate: date }));
      };
     const handleEndDateChange = (date) => {
-         setEndDate(date);
+         setTempContract(prev => ({ ...prev, endDate: date }));
     };
 
 
     const handleAgreementChange = (e) => {
-       setAgreement(e.target.checked);
+          setTempContract(prev => ({ ...prev, agreement: e.target.checked }));
     };
-
-    const handleContractSubmission = async () => {
-       if(!startDate || !endDate){
-            setError('Παρακαλώ επιλέξτε μια περίοδο απασχόλησης.');
+  const handleSaveDraft = async () => {
+        if(!tempContract.startDate || !tempContract.endDate){
+            setError("Παρακαλώ επιλέξτε ημερομηνία");
            return;
-        }
-        if(!agreement){
-            setError('Παρακαλώ αποδεχτείτε το συμφωνητικό.');
-            return;
-        }
+      }
+      try{
+           const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
+            if(tempContract.id){
+                await updateDoc(contractRef, {
+                     startDate: tempContract.startDate.toISOString(),
+                  endDate: tempContract.endDate.toISOString(),
+                     contractText: tempContract.contractText,
+                     status: 'draft',
+                   });
+            } else{
+              await setDoc(contractRef, {
+                  userId: auth.currentUser.uid,
+                   nannyId: nannyId,
+                 startDate: tempContract.startDate.toISOString(),
+                 endDate: tempContract.endDate.toISOString(),
+                 contractText: tempContract.contractText,
+                 status: 'draft',
+              });
+           }
+            setError("Draft Saved Successfully");
+          }
+       catch(error){
+           setError('Failed to save draft. Please try again later.');
+           console.error("Error saving draft: ", error);
+       }
+   };
+    const handleContractSubmission = async () => {
+       if(!tempContract.startDate || !tempContract.endDate){
+          setError('Παρακαλώ επιλέξτε μια περίοδο απασχόλησης.');
+           return;
+       }
+        if(!tempContract.agreement){
+          setError('Παρακαλώ αποδεχτείτε το συμφωνητικό.');
+           return;
+       }
       try {
           const contractsCollection = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
             await setDoc(contractsCollection, {
                userId: auth.currentUser.uid,
                nannyId: nannyId,
-                startDate: startDate.toISOString(),
-                endDate: endDate.toISOString(),
-                contractText: contractText,
+                startDate: tempContract.startDate.toISOString(),
+                endDate: tempContract.endDate.toISOString(),
+                contractText: tempContract.contractText,
                 status: 'pending',
            });
            navigate('/payment/' + nannyId);
         } catch(error){
             console.error('Error submitting contract:', error);
-           setError('Failed to submit the contract. Please try again later.')
+          setError('Failed to submit the contract. Please try again later.')
        }
-    }
+   }
 
 
     if (!nanny) {
@@ -103,17 +155,20 @@ function ContractPage() {
                </div>
             </div>
           <div className="contract-text-container">
-            <textarea value={contractText} readOnly/>
+            <textarea value={tempContract.contractText} readOnly/>
         </div>
         <div className="agreement-container">
             <label htmlFor="agreement">
-             <input type='checkbox' id='agreement' checked={agreement} onChange={handleAgreementChange} />
+             <input type='checkbox' id='agreement' checked={tempContract.agreement} onChange={handleAgreementChange} />
              Έχω διαβάσει και κατανοήσει το συμφωνητικό.
             </label>
           <p><b>**Η υπογραφή σας είναι νομικά δεσμευτική**</b></p>
         </div>
-           {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message">{error}</p>}
           <div className="contract-buttons">
+                {tempContract.status === "draft" && (
+                  <button onClick={handleSaveDraft} className="save-draft-button">Αποθήκευση</button>
+               )}
               <button onClick={handleContractSubmission} className="submit-contract-button">Υπογραφή Συμφωνητικού</button>
            </div>
       </div>
