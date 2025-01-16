@@ -22,10 +22,10 @@ function HistoryPage() {
     const fetchData = async () => {
       setLoading(true);
         try{
-           console.log('HistoryPage: Fetching data for user:', currentUser.uid);
+          console.log('HistoryPage: Fetching data for user:', currentUser.uid);
            await Promise.all([
                fetchContracts(),
-               fetchPayments(),
+                fetchPayments(),
                 fetchReviews()
         ]);
              console.log('HistoryPage: All data fetched successfully');
@@ -34,21 +34,21 @@ function HistoryPage() {
             console.error('HistoryPage: Error fetching data', err);
             setError('Failed to load contracts, payments, and reviews. Please try again later');
          }
-      finally {
-            setLoading(false);
+       finally {
+          setLoading(false);
       }
     };
    const fetchContracts = async () => {
-       try {
+        try {
             const contractsSnapshot = await getDocs(query(collection(db, 'contracts'), where('userId', '==', currentUser.uid)));
-             const contractsData = contractsSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+            const contractsData = contractsSnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
             setContracts(contractsData);
-            console.log('HistoryPage: Contracts fetched successfully:', contractsData);
-       }
-       catch (error){
-           console.error('HistoryPage: Error fetching contracts:', error);
-          setError('Failed to load contracts, please try again later');
-      }
+             console.log('HistoryPage: Contracts fetched successfully:', contractsData);
+        }
+        catch (error) {
+            console.error('HistoryPage: Error fetching contracts:', error);
+             setError('Failed to load contracts, please try again later');
+         }
     }
 
   const fetchPayments = async () => {
@@ -57,47 +57,58 @@ function HistoryPage() {
             const paymentsSnapshot = await getDocs(query(collection(db, 'payments'), where('userId', '==', currentUser.uid)));
            const paymentsData = await Promise.all(paymentsSnapshot.docs.map(async (doc) => {
                 const payment = { id: doc.id, ...doc.data() };
-                console.log("HistoryPage: Payment data fetched successfully:", payment)
-                try{
-                   const nannyDoc = await getDoc(doc(db, 'nannies', payment.nannyId));
-                   const nannyName = nannyDoc.exists() ? nannyDoc.data().name : 'Unknown Nanny';
-                   console.log("HistoryPage: Nanny Name fetched successfully:", nannyName)
+                console.log("HistoryPage: Payment data fetched:", payment)
+                 try{
+                    const nannyDoc = await getDoc(doc(db, 'nannies', payment.nannyId));
+                    const nannyName = nannyDoc.exists() ? nannyDoc.data().name : 'Unknown Nanny';
+                     console.log("HistoryPage: Nanny Name fetched successfully for id", payment.nannyId, " name:", nannyName);
                    return {...payment, nannyName: nannyName};
                   }
-                catch(fetchNannyError){
-                    console.error('HistoryPage: Error fetching nanny name:', fetchNannyError);
-                   return { ...payment, nannyName: 'Error - Unable to fetch Nanny'}
-                }
-
-           }));
-            setPayments(paymentsData);
-             console.log('HistoryPage: payments fetched successfully:', paymentsData);
-       } catch(error){
-          console.error('HistoryPage: Error fetching payments:', error);
-           setError('Failed to load payments, please try again later');
-       }
-  };
-    const fetchReviews = async () => {
-      try {
-        const reviewsSnapshot = await getDocs(query(collection(db, 'reviews'), where('userId', '==', currentUser.uid)));
-        const reviewsData = await Promise.all(reviewsSnapshot.docs.map(async (doc) => {
-            const review = { id: doc.id, ...doc.data() };
-             const nannyDoc = await getDoc(doc(db, 'nannies', review.nannyId));
-                return {...review, nannyName: nannyDoc.exists() ? nannyDoc.data().name : 'Unknown Nanny'}
-         }));
-          setReviews(reviewsData);
-          console.log('HistoryPage: Reviews fetched successfully:', reviewsData);
-      } catch (error){
-            console.error('HistoryPage: Error fetching reviews:', error);
-           setError('Failed to load reviews, please try again later');
+                catch(error){
+                   console.error('HistoryPage: Error fetching Nanny\'s name for id:', payment.nannyId , error);
+                   return { ...payment, nannyName: 'Error - Unable to fetch Nanny' };
+              }
+          }));
+          setPayments(paymentsData);
+          console.log('HistoryPage: payments fetched successfully:', paymentsData);
+     } catch(error){
+         console.error('HistoryPage: Error fetching payments:', error);
+          setError('Failed to load payments, please try again later');
       }
-    };
+  };
+ const fetchReviews = async () => {
+       try {
+         console.log("HistoryPage: Fetching reviews for user: ", currentUser.uid);
+          const reviewsQuery = query(collection(db, 'reviews'), where('userId', '==', currentUser.uid));
+            const reviewsSnapshot = await getDocs(reviewsQuery);
+         const reviewsData = await Promise.all(reviewsSnapshot.docs.map(async (doc) => {
+            const review = { id: doc.id, ...doc.data() };
+            console.log("HistoryPage: Fetched review data:", review)
+            try{
+               const nannyDoc = await getDoc(doc(db, 'nannies', review.nannyId));
+               const nannyName = nannyDoc.exists() ? nannyDoc.data().name : "Unknown Nanny";
+               console.log("HistoryPage: Nanny Name is: ", nannyName);
+               return { ...review, nannyName: nannyName }
+            }
+            catch (error) {
+                console.error('HistoryPage: Error fetching nanny name for id:', review.nannyId, error);
+                return { ...review, nannyName: "Error - Unable to fetch Nanny" };
+           }
+          }));
+           setReviews(reviewsData);
+         console.log("HistoryPage: Reviews fetched successfully:", reviewsData)
+      }
+    catch (error){
+           console.error('HistoryPage: Error fetching reviews:', error);
+         setError('Failed to load reviews, please try again later');
+    }
+   };
 
   if (error){
        return <p className="error-message">{error}</p>;
   }
-  if (loading) {
-      return <p>Loading history data...</p>;
+   if (loading) {
+       return <p>Loading history data...</p>;
    }
 
   return (
@@ -125,7 +136,7 @@ function HistoryPage() {
                   {payments.length > 0 ? (
                         payments.map(payment => (
                        <div key={payment.id} className='payment-card'>
-                         <p><strong>Ημερομηνία: </strong>{formatDate(payment.date)}</p>
+                          <p><strong>Ημερομηνία: </strong>{formatDate(payment.date)}</p>
                          <p><strong>Ποσό: </strong>{payment.amount}</p>
                             <p><strong>Nanny: </strong>{payment.nannyName}</p>
                           <p><strong>Κατάσταση: </strong>{payment.status}</p>
@@ -152,7 +163,7 @@ function HistoryPage() {
       </div>
   </div>
     </>
-  );
+ );
 }
 
 export default HistoryPage;

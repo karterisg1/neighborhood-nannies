@@ -89,20 +89,15 @@ function PaymentPage() {
                 status: 'completed',
                 nannyConfirmation: false,
             });
-          const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
-           await setDoc(contractRef, { status: 'completed' }, { merge: true })
-           setPaymentStatus('completed');
-             try{
-               navigate('/completed-vouchers');
-             }
-            catch (err){
-                console.error("Error redirecting to completed vouchers", err);
-            }
+            const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
+            await setDoc(contractRef, { status: 'completed' }, { merge: true })
+             setPaymentStatus('completed');
+            navigate(`/review/${nannyId}`);
         } catch (error) {
              console.error("Error marking payment as completed:", error);
             setError("Failed to mark payment as complete. Please try again.");
-       }
-   };
+        }
+    };
     if (!nanny) {
         return <p>Loading payment page...</p>
     }
@@ -136,7 +131,7 @@ function PaymentPage() {
                     <button onClick={handleCompletePayment} className='complete-payment-button'>ΟΛΟΚΛΗΡΩΣΗ</button>
                 )}
                 <Link to='/history' className='go-history-button'>Go To History</Link>
-                { currentUser?.email && currentUser?.email.includes('@gmail.com') === false &&  <Link to='/nanny-vouchers' className='nanny-vouchers-button'>Confirm Vouchers</Link> }
+                   { currentUser?.email && currentUser?.email.includes('@gmail.com') === false && <Link to='/nanny-vouchers' className='nanny-vouchers-button'>Confirm Vouchers</Link>}
             </div>
         </>
     );
