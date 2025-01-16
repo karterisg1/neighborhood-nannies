@@ -60,7 +60,7 @@ function Navbar() {
               )}
              {userRole === 'nanny' && (
                  <>
-                    <Link to="/search-nannies">Αναζήτηση</Link>
+                    <Link to="/search-parents">Αναζήτηση</Link>
                <Link to='/nanny-dashboard'>Dashboard</Link>
                   <Link to='/edit-profile'>Επεξεργασία Προφίλ</Link>
                     <Link to="/history">Ιστορικό</Link>

@@ -44,6 +44,7 @@ import FAQPage from './pages/FAQPage';
 import NannyVoucherConfirmationPage from './pages/NannyVoucherConfirmationPage';
 import NannyHistoryPage from './pages/NannyHistoryPage';
 import SearchParentsPage from './pages/SearchParentsPage';
+import ParentProfilePage from './pages/ParentProfilePage';
 import './App.css';
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
           <Route path='/nanny-history' element={<PrivateRoute><NannyHistoryPage /></PrivateRoute>}/>
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/search-parents" element={<PrivateRoute><SearchParentsPage /></PrivateRoute>} />
+          <Route path='/parent/:id' element={<PrivateRoute><ParentProfilePage /></PrivateRoute>} />
         </Routes>
       </Router>
     </AuthProvider>
