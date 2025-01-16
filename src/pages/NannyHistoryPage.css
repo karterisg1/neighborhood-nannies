@@ -1,0 +1,26 @@
+.nanny-history-page {
+    padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   margin: 20px auto;
+      width: 80%;
+  }
+  .nanny-history-page h2{
+      margin-bottom: 20px;
+  }
+  .history-container{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+  }
+  .history-card {
+     background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      width: calc(33.33% - 20px);
+  }
+  .history-card p{
+     margin-bottom: 8px;
+  }

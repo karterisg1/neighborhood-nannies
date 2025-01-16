@@ -44,6 +44,7 @@ import HelpPage from './pages/HelpPage';
 import AboutUsPage from './pages/AboutUsPage';
 import FAQPage from './pages/FAQPage';
 import NannyVoucherConfirmationPage from './pages/NannyVoucherConfirmationPage';
+import NannyHistoryPage from './pages/NannyHistoryPage';
 import './App.css';
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
          <Route path='/faq' element={<FAQPage />} />
           <Route path='/about-us' element={<AboutUsPage />} />
          <Route path='/nanny-vouchers' element={<PrivateRoute><NannyVoucherConfirmationPage /></PrivateRoute>}/>
+          <Route path='/nanny-history' element={<PrivateRoute><NannyHistoryPage /></PrivateRoute>}/>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
