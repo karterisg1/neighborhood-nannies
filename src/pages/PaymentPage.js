@@ -6,7 +6,6 @@ import './PaymentPage.css';
 import Navbar from '../components/Navbar';
 import { collection, addDoc, query, getDocs, where } from 'firebase/firestore';
 import AuthContext from '../contexts/AuthContext';
-import { format } from 'date-fns';
 
 
 function PaymentPage() {
@@ -16,9 +15,7 @@ function PaymentPage() {
     const [error, setError] = useState('');
     const [voucherText, setVoucherText] = useState('Voucher');
     const { currentUser } = useContext(AuthContext);
-    const [contract, setContract] = useState(null);
-    const [voucherAmount, setVoucherAmount] = useState("20$");
-     const [paymentDate, setPaymentDate] = useState('');
+    const [contract, setContract] = useState(null)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,9 +44,7 @@ function PaymentPage() {
            const contractSnap = await getDoc(contractRef);
             if (contractSnap.exists()) {
                 setContract(contractSnap.data());
-               const endDate = new Date(contractSnap.data().endDate);
-              setPaymentDate(format(endDate, 'dd/MM/yyyy'));
-          } else{
+            } else{
                 setError("Contract not found")
             }
          }
@@ -80,29 +75,34 @@ function PaymentPage() {
     }
  const handleCompletePayment = async () => {
     if (!contract || !nanny) {
-        setError("There is no contract or nanny to create a payment");
-           return;
+       setError("There is no contract or nanny to create a payment")
+       return;
     }
       try {
             const paymentsCollection = collection(db, 'payments');
             await addDoc(paymentsCollection, {
                 userId: auth.currentUser.uid,
                 nannyId: nannyId,
-                amount: voucherAmount,
-                date: new Date().toISOString(),
-                contractId: `${currentUser.uid}-${nannyId}`,
-               status: 'completed',
-               nannyConfirmation: false,
+                amount: '20$',
+               date: new Date().toISOString(),
+               contractId: `${currentUser.uid}-${nannyId}`,
+                status: 'completed',
+                nannyConfirmation: false,
             });
-            const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
-            await setDoc(contractRef, { status: 'completed' }, { merge: true })
-             setPaymentStatus('completed');
-            navigate('/completed-vouchers');
+          const contractRef = doc(db, 'contracts', `${auth.currentUser.uid}-${nannyId}`);
+           await setDoc(contractRef, { status: 'completed' }, { merge: true })
+           setPaymentStatus('completed');
+             try{
+               navigate('/completed-vouchers');
+             }
+            catch (err){
+                console.error("Error redirecting to completed vouchers", err);
+            }
         } catch (error) {
              console.error("Error marking payment as completed:", error);
-             setError("Failed to mark payment as complete. Please try again.");
+            setError("Failed to mark payment as complete. Please try again.");
        }
-    };
+   };
     if (!nanny) {
         return <p>Loading payment page...</p>
     }
@@ -119,9 +119,6 @@ function PaymentPage() {
                     <div className="voucher-container">
                         <p><strong>{voucherText}</strong></p>
                         <p>Η εργασία ολοκληρώθηκε επιτυχώς.</p>
-                          <p>ΠΟΣΟ: {voucherAmount}</p>
-                          <p>ΗΜΕΡΟΜΗΝΙΑ ΛΗΞΗΣ: {paymentDate}</p>
-
                     </div>
 
                 </div>
@@ -133,12 +130,13 @@ function PaymentPage() {
                         :
                         <p>ΕΠΙΒΕΒΑΙΩΜΕΝΟ</p>
                     }
+                    <p>ΠΟΣΟ: 20$</p>
                 </div>
                 {paymentStatus === 'pending' && (
                     <button onClick={handleCompletePayment} className='complete-payment-button'>ΟΛΟΚΛΗΡΩΣΗ</button>
                 )}
                 <Link to='/history' className='go-history-button'>Go To History</Link>
-                 { currentUser?.email && currentUser?.email.includes('@gmail.com') === false &&  <Link to='/nanny-vouchers' className='nanny-vouchers-button'>Confirm Vouchers</Link> }
+                { currentUser?.email && currentUser?.email.includes('@gmail.com') === false &&  <Link to='/nanny-vouchers' className='nanny-vouchers-button'>Confirm Vouchers</Link> }
             </div>
         </>
     );
