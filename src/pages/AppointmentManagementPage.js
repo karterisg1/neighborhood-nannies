@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { generateChatId } from '../utils/utils';
 
 function AppointmentManagementPage() {
-  const [appointments, setAppointments] = useState([]);
+   const [appointments, setAppointments] = useState([]);
     const [error, setError] = useState('');
     const [filterStatus, setFilterStatus] = useState('pending');
     const {currentUser} = useContext(AuthContext);
