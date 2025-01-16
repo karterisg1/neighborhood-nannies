@@ -35,7 +35,6 @@ import OnboardingParentPage from './pages/OnboardingParentPage';
 import OnboardingNannyPage from './pages/OnboardingNannyPage';
 import VouchersPage from './pages/VouchersPage';
 import PaymentHistoryPage from './pages/PaymentHistoryPage';
-import BalancePage from './pages/BalancePage';
 import ReviewDetailsPage from './pages/ReviewDetailsPage';
 import RecommendationRequestPage from './pages/RecommendationRequestPage';
 import PasswordResetPage from './pages/PasswordResetPage';
@@ -87,7 +86,6 @@ function App() {
            <Route path='/onboarding-nanny' element={<OnboardingNannyPage />} />
          <Route path='/vouchers' element={<PrivateRoute><VouchersPage /></PrivateRoute>} />
             <Route path='/payment-history' element={<PrivateRoute><PaymentHistoryPage /></PrivateRoute>} />
-            <Route path='/balance' element={<PrivateRoute><BalancePage /></PrivateRoute>} />
           <Route path='/review/:id/details' element={<PrivateRoute><ReviewDetailsPage /></PrivateRoute>} />
            <Route path='/recommendation-request/:nannyId' element={<PrivateRoute><RecommendationRequestPage /></PrivateRoute>} />
             <Route path='/reset-password' element={<PasswordResetPage />} />
