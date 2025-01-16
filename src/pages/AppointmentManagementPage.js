@@ -22,118 +22,118 @@ function AppointmentManagementPage() {
   const fetchAppointments = async () => {
       setLoading(true);
       try {
-        let q = query(collection(db, 'appointments'), where('nannyId', '==', currentUser.uid));
-         if (filterStatus !== 'all'){
-           q = query(q, where('status', '==', filterStatus));
-        }
-          const querySnapshot = await getDocs(q);
-            const appointmentData = await Promise.all(querySnapshot.docs.map(async (doc) => {
+          let q = query(collection(db, 'appointments'), where('nannyId', '==', currentUser.uid));
+          if (filterStatus !== 'all'){
+              q = query(q, where('status', '==', filterStatus));
+         }
+        const querySnapshot = await getDocs(q);
+          const appointmentData = await Promise.all(querySnapshot.docs.map(async (doc) => {
               const appointment = { id: doc.id, ...doc.data() };
                const userDoc = await getDoc(doc(db, 'users', appointment.userId))
-              return {...appointment, userName: userDoc.exists() ? userDoc.data().firstName + " " + userDoc.data().lastName : 'Unknown User'}
-            }))
-         setAppointments(appointmentData);
-           setLoading(false);
-      }
+             return {...appointment, userName: userDoc.exists() ? userDoc.data().firstName + " " + userDoc.data().lastName : 'Unknown User'}
+         }))
+       setAppointments(appointmentData);
+       setLoading(false);
+    }
      catch(error) {
           console.error('Error fetching appointments', error);
-         setError('Failed to load appointments. Please try again later.');
+          setError('Failed to load appointments. Please try again later.');
          setLoading(false);
-        }
     }
+}
 
    const handleFilterChange = (e) => {
-        setFilterStatus(e.target.value);
-    }
+      setFilterStatus(e.target.value);
+  }
 
 
-     const handleConfirmAppointment = async (appointmentId) => {
-         try{
-             const appointmentRef = doc(db, 'appointments', appointmentId);
-            await updateDoc(appointmentRef, {status: 'confirmed'});
-              setAppointments(appointments.map(app => {
-                  if(app.id === appointmentId){
-                    return {...app, status: 'confirmed'};
-                  }
-                  return app;
-              }))
-         }
-       catch(error) {
-           console.error("Error confirming appointment:", error);
-          setError("Failed to confirm the appointment, please try again later");
-       }
-    };
-
-    const handleRejectAppointment = async (appointmentId) => {
-        try{
-             const appointmentRef = doc(db, 'appointments', appointmentId);
-            await updateDoc(appointmentRef, {status: 'rejected'});
-              setAppointments(appointments.map(app => {
-                  if(app.id === appointmentId){
-                    return {...app, status: 'rejected'};
-                 }
+   const handleConfirmAppointment = async (appointmentId) => {
+       try{
+           const appointmentRef = doc(db, 'appointments', appointmentId);
+          await updateDoc(appointmentRef, {status: 'confirmed'});
+            setAppointments(appointments.map(app => {
+                if(app.id === appointmentId){
+                  return {...app, status: 'confirmed'};
+                }
                 return app;
-             }))
+            }))
        }
-       catch(error) {
-           console.error("Error rejecting appointment:", error);
-           setError("Failed to reject the appointment, please try again later");
-      }
-    };
-     if (error){
-         return <p className="error-message">{error}</p>;
+     catch(error) {
+         console.error("Error confirming appointment:", error);
+        setError("Failed to confirm the appointment, please try again later");
      }
-    if (loading){
-        return <p>Loading appointments...</p>
-    }
+  };
 
-    return (
-        <>
-            <Navbar />
-        <div className="appointment-management-page">
-             <h2>Διαχείριση Ραντεβού</h2>
-              <div className="filter-section">
-                <label htmlFor='statusFilter'>Φίλτρο Κατάστασης:</label>
-                <select id='statusFilter' value={filterStatus} onChange={handleFilterChange}>
-                   <option value='all'>Όλα</option>
-                  <option value='pending'>Σε Εκκρεμότητα</option>
-                  <option value='confirmed'>Επιβεβαιωμένο</option>
-                 <option value='rejected'>Απορριφθηκε</option>
-               </select>
-              </div>
-                {appointments.length === 0 ? (
-                   <p>Δεν υπάρχουν προγραμματισμένα ραντεβού.</p>
-                  ) : (
-                 <div className="appointments-container">
-                     {appointments.map(app => (
-                          <div key={app.id} className={`appointment-card ${app.status}`}>
-                           <div className='user-info'>
-                                 <p><strong>User: </strong> {app.userName} ({app.userId})</p>
-                                <Link to={`/chat/${generateChatId(app.userId, currentUser.uid)}`} className="chat-button">Chat</Link>
-                             </div>
-                            <div className='appointment-info'>
-                                <p><strong>Ημερομηνία:</strong> {new Date(app.date).toLocaleDateString()}</p>
-                                 <p><strong>Ώρα:</strong> {app.time}</p>
-                                <p><strong>Τύπος:</strong> {app.type}</p>
-                         </div>
-                          <div className="appointment-buttons">
-                            {app.status === 'pending' && (
+  const handleRejectAppointment = async (appointmentId) => {
+      try{
+           const appointmentRef = doc(db, 'appointments', appointmentId);
+          await updateDoc(appointmentRef, {status: 'rejected'});
+            setAppointments(appointments.map(app => {
+                if(app.id === appointmentId){
+                  return {...app, status: 'rejected'};
+               }
+              return app;
+           }))
+     }
+     catch(error) {
+         console.error("Error rejecting appointment:", error);
+         setError("Failed to reject the appointment, please try again later");
+    }
+  };
+  if (error){
+       return <p className="error-message">{error}</p>;
+  }
+ if (loading){
+      return <p>Loading appointments...</p>;
+}
+
+  return (
+      <>
+          <Navbar />
+      <div className="appointment-management-page">
+           <h2>Διαχείριση Ραντεβού</h2>
+            <div className="filter-section">
+               <label htmlFor='statusFilter'>Φίλτρο Κατάστασης:</label>
+               <select id='statusFilter' value={filterStatus} onChange={handleFilterChange}>
+                 <option value='all'>Όλα</option>
+                   <option value='pending'>Σε Εκκρεμότητα</option>
+                 <option value='confirmed'>Επιβεβαιωμένο</option>
+                <option value='rejected'>Απορριφθηκε</option>
+              </select>
+             </div>
+               {appointments.length === 0 ? (
+                  <p>Δεν υπάρχουν προγραμματισμένα ραντεβού.</p>
+                ) : (
+                  <div className="appointments-container">
+                    {appointments.map(app => (
+                       <div key={app.id} className={`appointment-card ${app.status}`}>
+                          <div className='user-info'>
+                            <p><strong>User: </strong> {app.userName} ({app.userId})</p>
+                             <Link to={`/chat/${generateChatId(app.userId, currentUser.uid)}`} className="chat-button">Chat</Link>
+                           </div>
+                          <div className='appointment-info'>
+                              <p><strong>Ημερομηνία:</strong> {new Date(app.date).toLocaleDateString()}</p>
+                             <p><strong>Ώρα:</strong> {app.time}</p>
+                             <p><strong>Τύπος:</strong> {app.type}</p>
+                      </div>
+                         <div className="appointment-buttons">
+                             {app.status === 'pending' && (
                                 <>
-                                   <button onClick={() => handleConfirmAppointment(app.id)} className='confirm-button'>Επιβεβαίωση</button>
-                                   <button onClick={() => handleRejectAppointment(app.id)} className='reject-button'>Απόρριψη</button>
+                                    <button onClick={() => handleConfirmAppointment(app.id)} className='confirm-button'>Επιβεβαίωση</button>
+                                  <button onClick={() => handleRejectAppointment(app.id)} className='reject-button'>Απόρριψη</button>
                                 </>
-                             )}
-                            {app.status === 'confirmed' && <p>Επιβεβαιωμένο</p>}
-                            {app.status === 'rejected' && <p>Απορριφθηκε</p>}
+                              )}
+                                {app.status === 'confirmed' && <p>Επιβεβαιωμένο</p>}
+                               {app.status === 'rejected' && <p>Απορριφθηκε</p>}
                            </div>
                        </div>
-                      ))
+                       ))
                     }
                </div>
              )}
-         </div>
-       </>
-    );
+        </div>
+      </>
+  );
 }
 
 export default AppointmentManagementPage;
