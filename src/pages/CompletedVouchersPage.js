@@ -9,51 +9,48 @@ function CompletedVouchersPage() {
     const [payments, setPayments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const { currentUser } = useContext(AuthContext);
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
-        console.log("CompletedVouchersPage: useEffect triggered.");
-        fetchPayments();
+         fetchPayments();
     }, []);
 
-   const fetchPayments = async () => {
-       setLoading(true);
-      console.log("CompletedVouchersPage: Fetching payments started for userId:", currentUser?.uid);
-         try {
-             const q = query(collection(db, 'payments'), where('userId', '==', currentUser.uid));
-            const querySnapshot = await getDocs(q);
-            const paymentsData = [];
-            for (const doc of querySnapshot.docs) {
+
+    const fetchPayments = async () => {
+      setLoading(true);
+        try {
+             console.log("CompletedVouchersPage: Fetching payments started for user id: ", currentUser.uid);
+             const paymentsSnapshot = await getDocs(query(collection(db, 'payments'), where('userId', '==', currentUser.uid)));
+             const paymentsData = await Promise.all(paymentsSnapshot.docs.map(async (doc) => {
                 const payment = { id: doc.id, ...doc.data() };
-                console.log('CompletedVouchersPage: Fetched payment data:', payment);
+                console.log("CompletedVouchersPage: Fetched payment data:", payment);
                try{
                    const nannyDoc = await getDoc(doc(db, 'nannies', payment.nannyId));
-                   const nannyName = nannyDoc.exists() ? nannyDoc.data().name : 'Unknown Nanny';
-                   console.log("CompletedVouchersPage: Fetched nanny name for:", payment.nannyId, " Name: ", nannyName);
-                     paymentsData.push({ ...payment, nannyName: nannyName });
-                   }
-               catch(fetchNannyError){
-                   console.error("Error fetching nanny data:", fetchNannyError)
-                   paymentsData.push({ ...payment, nannyName: 'Error - Unable to Fetch Nanny Name'})
-               }
-            }
+                     const nannyName = nannyDoc.exists() ? nannyDoc.data().name : 'Unknown Nanny';
+                     console.log("CompletedVouchersPage: Fetched nanny name for id:", payment.nannyId, " Name:", nannyName);
+                     return { ...payment, nannyName: nannyName };
+                 }
+                  catch (fetchNannyError) {
+                   console.error('CompletedVouchersPage: Error fetching nanny data for ID:', payment.nannyId, fetchNannyError);
+                   return { ...payment, nannyName: 'Error - Unable to Fetch Nanny Name'};
+                }
+             }));
            setPayments(paymentsData);
-           console.log("CompletedVouchersPage: Payments set, and loading is done");
-              setLoading(false);
-        }
-        catch (error) {
-            console.error('CompletedVouchersPage: Error fetching payments:', error);
-            setError('Failed to load payments. Please try again later.');
-            setLoading(false);
-        }
+              setLoading(false)
+              console.log("CompletedVouchersPage: All data fetched correctly:", paymentsData);
+          } catch (error) {
+              console.error('CompletedVouchersPage: Error fetching payments:', error);
+              setError('Failed to load payments. Please try again later.');
+               setLoading(false)
+           }
     };
 
    if (error){
-      return <p className="error-message">{error}</p>;
+        return <p className="error-message">{error}</p>;
    }
-    if(loading){
-      return <p>Loading completed vouchers...</p>
-  }
+  if(loading) {
+        return <p>Loading completed vouchers...</p>;
+    }
   return (
     <>
         <Navbar />
