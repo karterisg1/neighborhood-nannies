@@ -11,6 +11,7 @@ function AppointmentManagementPage() {
    const [appointments, setAppointments] = useState([]);
     const [error, setError] = useState('');
     const [filterStatus, setFilterStatus] = useState('pending');
+    const [loading, setLoading] = useState(true);
     const {currentUser} = useContext(AuthContext);
 
 
@@ -19,6 +20,7 @@ function AppointmentManagementPage() {
     }, [filterStatus]);
 
   const fetchAppointments = async () => {
+      setLoading(true);
       try {
         let q = query(collection(db, 'appointments'), where('nannyId', '==', currentUser.uid));
          if (filterStatus !== 'all'){
@@ -31,10 +33,12 @@ function AppointmentManagementPage() {
               return {...appointment, userName: userDoc.exists() ? userDoc.data().firstName + " " + userDoc.data().lastName : 'Unknown User'}
             }))
          setAppointments(appointmentData);
-        }
+           setLoading(false);
+      }
      catch(error) {
           console.error('Error fetching appointments', error);
          setError('Failed to load appointments. Please try again later.');
+         setLoading(false);
         }
     }
 
@@ -79,7 +83,9 @@ function AppointmentManagementPage() {
      if (error){
          return <p className="error-message">{error}</p>;
      }
-
+    if (loading){
+        return <p>Loading appointments...</p>
+    }
 
     return (
         <>
@@ -95,29 +101,36 @@ function AppointmentManagementPage() {
                  <option value='rejected'>Απορριφθηκε</option>
                </select>
               </div>
-              {appointments.length === 0 ? (
-                 <p>Δεν υπάρχουν προγραμματισμένα ραντεβού</p>
-              ) : (
-                 appointments.map(app => (
-                    <div key={app.id} className="appointment-card">
-                       <p><strong>User: </strong> {app.userName} ({app.userId})</p>
-                         <p>Ημερομηνία: {new Date(app.date).toLocaleDateString()}</p>
-                        <p>Ώρα: {app.time}</p>
-                         <p>Τύπος: {app.type}</p>
-                      <div className="appointment-buttons">
-                         {app.status === 'pending' && (
-                            <>
-                             <button onClick={() => handleConfirmAppointment(app.id)} className='confirm-button'>Επιβεβαίωση</button>
-                             <button onClick={() => handleRejectAppointment(app.id)} className='reject-button'>Απόρριψη</button>
-                            </>
-                          )}
-                           {app.status === 'confirmed' && <p>Επιβεβαιωμένο</p>}
-                            {app.status === 'rejected' && <p>Απορριφθηκε</p>}
-                         <Link to={`/chat/${generateChatId(app.userId, currentUser.uid)}`} className="chat-button">Chat</Link>
+                {appointments.length === 0 ? (
+                   <p>Δεν υπάρχουν προγραμματισμένα ραντεβού.</p>
+                  ) : (
+                 <div className="appointments-container">
+                     {appointments.map(app => (
+                          <div key={app.id} className={`appointment-card ${app.status}`}>
+                           <div className='user-info'>
+                                 <p><strong>User: </strong> {app.userName} ({app.userId})</p>
+                                <Link to={`/chat/${generateChatId(app.userId, currentUser.uid)}`} className="chat-button">Chat</Link>
+                             </div>
+                            <div className='appointment-info'>
+                                <p><strong>Ημερομηνία:</strong> {new Date(app.date).toLocaleDateString()}</p>
+                                 <p><strong>Ώρα:</strong> {app.time}</p>
+                                <p><strong>Τύπος:</strong> {app.type}</p>
                          </div>
-                    </div>
-                  ))
-                )}
+                          <div className="appointment-buttons">
+                            {app.status === 'pending' && (
+                                <>
+                                   <button onClick={() => handleConfirmAppointment(app.id)} className='confirm-button'>Επιβεβαίωση</button>
+                                   <button onClick={() => handleRejectAppointment(app.id)} className='reject-button'>Απόρριψη</button>
+                                </>
+                             )}
+                            {app.status === 'confirmed' && <p>Επιβεβαιωμένο</p>}
+                            {app.status === 'rejected' && <p>Απορριφθηκε</p>}
+                           </div>
+                       </div>
+                      ))
+                    }
+               </div>
+             )}
          </div>
        </>
     );
