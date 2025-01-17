@@ -66,10 +66,14 @@ function Navbar() {
                     <Link to="/history">Ιστορικό</Link>
                        <Link to="/vouchers">Vouchers</Link>
                       <Link to='/notifications'>Notifications</Link>
+                    <Link to="/nanny-history">My Contracts</Link>
+                      <Link to='/settings'>Settings</Link>
                    </>
                )}
                { currentUser?.email && currentUser?.email === 'admin@gmail.com' && <Link to='/admin-dashboard'>Admin</Link>}
                 <Link to='/help'>Help</Link>
+                  <Link to='/messages/inbox'>Inbox</Link>
+                  <Link to='/messages/outbox'>Outbox</Link>
                 <button onClick={handleLogout}>Αποσύνδεση</button>
               </>
              )}
