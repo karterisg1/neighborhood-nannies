@@ -60,9 +60,16 @@ function HistoryPage() {
                 console.log("HistoryPage: Payment data fetched:", payment)
                  try{
                     const nannyDoc = await getDoc(doc(db, 'nannies', payment.nannyId));
-                    const nannyName = nannyDoc.exists() ? nannyDoc.data().name : 'Unknown Nanny';
-                     console.log("HistoryPage: Nanny Name fetched successfully for id", payment.nannyId, " name:", nannyName);
-                   return {...payment, nannyName: nannyName};
+                     if(nannyDoc.exists()){
+                       const nannyName = nannyDoc.data().name;
+                       console.log("HistoryPage: Nanny Name fetched successfully for id", payment.nannyId, " name:", nannyName);
+                       return {...payment, nannyName: nannyName};
+                     } else {
+                       console.error("HistoryPage: No nanny found with ID:", payment.nannyId);
+                       return { ...payment, nannyName: 'Nanny not Found' };
+                     }
+
+
                   }
                 catch(error){
                    console.error('HistoryPage: Error fetching Nanny\'s name for id:', payment.nannyId , error);
@@ -86,9 +93,15 @@ function HistoryPage() {
             console.log("HistoryPage: Fetched review data:", review)
             try{
                const nannyDoc = await getDoc(doc(db, 'nannies', review.nannyId));
-               const nannyName = nannyDoc.exists() ? nannyDoc.data().name : "Unknown Nanny";
-               console.log("HistoryPage: Nanny Name is: ", nannyName);
-               return { ...review, nannyName: nannyName }
+                 if(nannyDoc.exists()){
+                   const nannyName = nannyDoc.data().name;
+                   console.log("HistoryPage: Nanny Name is: ", nannyName);
+                   return { ...review, nannyName: nannyName };
+                 } else {
+                     console.error("HistoryPage: No nanny found with ID:", review.nannyId);
+                   return { ...review, nannyName: 'Nanny not Found' };
+                 }
+
             }
             catch (error) {
                 console.error('HistoryPage: Error fetching nanny name for id:', review.nannyId, error);
