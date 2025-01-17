@@ -31,6 +31,7 @@ function HomePage() {
        <div className='home-buttons'>
         <Link to="/register" className="register-button">Εγγραφή</Link>
          <Link to="/login" className="login-button">Είσοδος</Link>
+        <Link to="/eligibility" className="eligibility-button">Eligibility Criteria</Link>
        </div>
     </div>
     </div>
