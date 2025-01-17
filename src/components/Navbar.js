@@ -8,7 +8,7 @@ import { db } from '../firebase';
 function Navbar() {
     const { currentUser, logout } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [userRole, setUserRole] = useState(null);
+     const [userRole, setUserRole] = useState(null);
 
     useEffect(() => {
       const fetchUserRole = async () => {
@@ -50,26 +50,25 @@ function Navbar() {
                    <Link to='/parent-dashboard' aria-label="Πίνακας Ελέγχου Γονέα">Dashboard</Link>
                  <Link to='/edit-profile' aria-label="Επεξεργασία Προφίλ">Επεξεργασία Προφίλ</Link>
                 <Link to="/history" aria-label="Ιστορικό">Ιστορικό</Link>
-               <Link to="/vouchers" aria-label="Vouchers">Vouchers</Link>
+               <Link to="/completed-vouchers" aria-label="Vouchers">Vouchers</Link>
                   <Link to='/notifications' aria-label="Ειδοποιήσεις">Notifications</Link>
                    </>
               )}
              {userRole === 'nanny' && (
                  <>
-                    <Link to="/search-parents" aria-label="Αναζήτηση γονέων">Αναζήτηση</Link>
+                    <Link to="/search-nannies" aria-label="Αναζήτηση γονέων">Αναζήτηση</Link>
                <Link to='/nanny-dashboard' aria-label="Πίνακας Ελέγχου Νταντάς">Dashboard</Link>
                   <Link to='/edit-profile' aria-label="Επεξεργασία Προφίλ">Επεξεργασία Προφίλ</Link>
-                    <Link to="/history" aria-label="Ιστορικό">Ιστορικό</Link>
-                       <Link to="/vouchers" aria-label="Vouchers">Vouchers</Link>
+                   <Link to="/nanny-history" aria-label="Ιστορικό Συμβάσεων">Ιστορικό</Link>
+                       <Link to="/nanny-vouchers" aria-label="Vouchers">Vouchers</Link>
                       <Link to='/notifications' aria-label="Ειδοποιήσεις">Notifications</Link>
-                    <Link to="/nanny-history" aria-label="Ιστορικό Συμβάσεων">My Contracts</Link>
-                      <Link to='/settings' aria-label="Ρυθμίσεις">Settings</Link>
+                       <Link to='/settings' aria-label="Ρυθμίσεις">Settings</Link>
                    </>
                )}
                { currentUser?.email && currentUser?.email === 'admin@gmail.com' && <Link to='/admin-dashboard' aria-label="Πίνακας Ελέγχου Διαχειριστή">Admin</Link>}
                 <Link to='/help' aria-label="Βοήθεια">Help</Link>
                   <Link to='/messages/inbox' aria-label='Εισερχόμενα'>Inbox</Link>
-                  <Link to='/messages/outbox' aria-label='Απεσταλμένα'>Outbox</Link>
+                 <Link to='/messages/outbox' aria-label='Απεσταλμένα'>Outbox</Link>
                 <button onClick={handleLogout} aria-label="Αποσύνδεση">Αποσύνδεση</button>
               </>
              ) : (
