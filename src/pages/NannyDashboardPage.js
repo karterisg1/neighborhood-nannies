@@ -101,6 +101,7 @@ function NannyDashboardPage() {
              <Link to='/nanny/manage-ads' className='manage-ads-button'>Manage Ads</Link>
          <Link to='/manage-appointments' className='manage-appointments-button'>Διαχείριση Ραντεβού</Link>
         <Link to='/schedule' className='schedule-button'>Manage Schedule</Link>
+        <Link to='/search-parents' className="search-parents-button">Αναζήτηση Γονέων</Link>
          </div>
 
          <div className="notifications-section">
