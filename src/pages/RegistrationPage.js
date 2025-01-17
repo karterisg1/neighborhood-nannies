@@ -24,7 +24,7 @@ function RegistrationPage() {
       setError("Οι κωδικοί δεν ταιριάζουν.");
       return;
     }
-       const { user, role: userRole, error: registerError } = await register(email, password, firstName, lastName, role);
+        const { user, role: userRole, error: registerError } = await register(email, password, firstName, lastName, role);
         if(user){
            if (userRole === 'nanny') {
                try {
@@ -68,35 +68,35 @@ function RegistrationPage() {
         <form onSubmit={handleRegister}>
           <div className="form-group">
             <label htmlFor="firstName">Όνομα</label>
-            <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+            <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required aria-label="Εισάγετε το όνομά σας"/>
           </div>
           <div className="form-group">
             <label htmlFor="lastName">Επώνυμο</label>
-            <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+            <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required aria-label="Εισάγετε το επώνυμό σας" />
           </div>
           <div className="form-group">
            <label htmlFor="email">Email</label>
-           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required aria-label="Εισάγετε το email σας"/>
          </div>
           <div className="form-group">
             <label htmlFor="password">Κωδικός</label>
-             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required aria-label="Εισάγετε τον κωδικό σας"/>
           </div>
             <div className="form-group">
               <label htmlFor="confirmPassword">Επιβεβαίωση Κωδικού</label>
-             <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+             <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required aria-label="Επιβεβαίωση κωδικού" />
           </div>
            <div className="form-group">
             <label htmlFor='role'>Είμαι</label>
-               <select id='role' value={role} onChange={handleRoleChange}>
+               <select id='role' value={role} onChange={handleRoleChange} aria-label="Επιλέξτε ρόλο">
                    <option value='parent'>Γονέας</option>
                  <option value='nanny'>Νταντά/Επιμελητής</option>
               </select>
             </div>
-          <button type="submit" className="register-button">Ολοκλήρωση Εγγραφής</button>
-        <button type="button" onClick={handleTaxisnetRegister} className="taxisnet-register-button">Εγγραφή με TaxisNet</button>
+          <button type="submit" className="register-button" aria-label="Ολοκλήρωση Εγγραφής">Ολοκλήρωση Εγγραφής</button>
+        <button type="button" onClick={handleTaxisnetRegister} className="taxisnet-register-button" aria-label="Εγγραφή με TaxisNet">Εγγραφή με TaxisNet</button>
             <div className="register-footer">
-              <Link to="/login">Έχετε Λογαριασμό; Είσοδος</Link>
+              <Link to="/login"  aria-label="Μεταβείτε στην σελίδα σύνδεσης">Έχετε Λογαριασμό; Είσοδος</Link>
            </div>
         </form>
       </div>

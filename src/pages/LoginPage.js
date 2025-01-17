@@ -11,7 +11,6 @@ function LoginPage() {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-
     const handleLogin = async (e) => {
         e.preventDefault();
          const { user, role, error } = await login(email, password);
@@ -44,17 +43,17 @@ function LoginPage() {
                 <form onSubmit={handleLogin}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required aria-label="Εισάγετε το email σας"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Κωδικός</label>
-                         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required aria-label="Εισάγετε τον κωδικό σας"/>
                    </div>
-                    <button type="submit" className="login-button">Είσοδος</button>
-                    <button type="button" onClick={handleTaxisnetLogin} className="taxisnet-login-button">Είσοδος με TaxisNet</button>
+                    <button type="submit" className="login-button" aria-label="Σύνδεση">Είσοδος</button>
+                    <button type="button" onClick={handleTaxisnetLogin} className="taxisnet-login-button" aria-label='Είσοδος με TaxisNet'>Είσοδος με TaxisNet</button>
                      <div className="login-footer">
-                         <Link to="/register">Εγγραφή</Link>
-                          <Link to="/reset-password">Ξέχασα τον κωδικό</Link>
+                         <Link to="/register"  aria-label="Μεταβείτε στην σελίδα εγγραφής">Εγγραφή</Link>
+                          <Link to="/reset-password" aria-label="Ξεχάσατε τον κωδικό σας;">Ξέχασα τον κωδικό</Link>
                     </div>
                 </form>
             </div>
