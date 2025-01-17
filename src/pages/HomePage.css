@@ -1,3 +1,219 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+}
+
+.app.light {
+    background-color: #f0f4f7;
+    color: #333;
+}
+
+.app.dark {
+    background-color: #333;
+    color: #fff;
+}
+
+.app.dark .navbar {
+  background-color: #222;
+    color: #fff;
+}
+
+.app.dark .navbar a{
+  color: #fff;
+}
+
+.app.dark .navbar button {
+  color: #fff;
+}
+
+.app.dark .navbar-links {
+    background-color: #222;
+}
+
+.app.dark .login-page,
+.app.dark .registration-page,
+.app.dark .password-reset-page {
+  background-color: #444;
+  color:#fff;
+}
+.app.dark .login-form h2,
+.app.dark .registration-form h2,
+.app.dark .password-reset-page h2 {
+  color: #fff;
+}
+
+.app.dark .login-form,
+.app.dark .registration-form,
+.app.dark .password-reset-page form,
+.app.dark .login-footer,
+.app.dark .register-footer {
+  color:#fff;
+}
+
+
+.app.dark .login-form .form-group label,
+.app.dark .registration-form .form-group label,
+.app.dark .password-reset-page form .form-group label,
+.app.dark .login-footer a,
+.app.dark .register-footer a {
+ color: #fff;
+}
+
+.app.dark input,
+.app.dark select,
+.app.dark textarea{
+    background-color: #555;
+    color: #fff;
+    border-color: #777;
+}
+
+.app.dark .time-button {
+      background-color: #444;
+       color: #fff;
+  }
+
+  .app.dark .time-button.active {
+       background-color: #666;
+    }
+.app.dark .booking-page .book-appointment-button,
+.app.dark .contract-page .contract-buttons button,
+.app.dark .contract-details-page,
+.app.dark .contract-page,
+.app.dark .contract-page .contract-form .agreement-container p,
+.app.dark .review-page,
+.app.dark .booking-page,
+.app.dark .full-nanny-profile-page,
+.app.dark .edit-profile-page,
+.app.dark .edit-nanny-profile-page,
+.app.dark .nanny-dashboard-page,
+.app.dark .parent-dashboard-page,
+.app.dark .admin-dashboard-page,
+.app.dark .nanny-manage-ads-page,
+.app.dark .advanced-search-page,
+.app.dark .contact-us-page,
+.app.dark .help-page,
+.app.dark .nanny-history-page,
+.app.dark .appointment-management-page,
+.app.dark .payment-history-page,
+.app.dark .nanny-voucher-confirmation-page,
+.app.dark .vouchers-page{
+    background-color: #444;
+    color: #fff;
+}
+
+.app.dark .review-details-page,
+.app.dark .review-page .review-status{
+    color: #fff;
+}
+
+.app.dark .notification-card {
+     background-color: #555;
+     color: #fff;
+}
+.app.dark .message-card {
+  background-color: #555;
+  color: #fff;
+}
+.app.dark .nanny-card {
+  background-color: #555;
+  color: #fff;
+}
+.app.dark .parent-card {
+  background-color: #555;
+  color: #fff;
+}
+.app.dark .voucher-card {
+  background-color: #555;
+    color: #fff;
+}
+.app.dark .ad-card {
+      background-color: #555;
+    color: #fff;
+}
+
+.app.dark .nanny-card h3 {
+    color:#fff;
+}
+
+.app.dark .nanny-card .view-profile-button{
+    color:#fff;
+}
+
+.app.dark .contract-card {
+    background-color: #555;
+    color: #fff;
+}
+
+.app.dark .payment-card {
+     background-color: #555;
+    color: #fff;
+}
+
+.app.dark .review-card{
+  background-color: #555;
+    color:#fff;
+}
+
+.error-message {
+    color: #dc3545; /* Red Error Color */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8d7da; /* Light Red background */
+    border-radius: 5px;
+}
+
+button{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+}
+h2, h3 {
+    color: #0056b3; /* Dark Blue Titles */
+      transition: color 0.3s ease;
+}
+.app.dark h2, .app.dark h3{
+  color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+.app.dark a{
+  color: #00aaff;
+}
+
+.success-message {
+    color: green;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #d4edda; /* Light Green background */
+    border-radius: 5px;
+}
+
+.top-links {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    gap: 20px;
+     width: 100%;
+}
+.top-link{
+   text-decoration: none;
+     color: #007bff;
+      transition: color 0.3s ease;
+}
+
+.top-link:hover{
+    color: #0056b3;
+}
 .home-buttons {
     display: flex;
     flex-direction: column;

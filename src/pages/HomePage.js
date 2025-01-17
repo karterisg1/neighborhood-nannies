@@ -6,6 +6,11 @@ import logo from '../assets/logo.png'
 function HomePage() {
   return (
     <div className="home-page">
+        <div className="top-links">
+            <Link to="/how-it-works" className="top-link" aria-label="Πώς λειτουργεί">How it works</Link>
+            <Link to="/faq" className="top-link" aria-label="Συχνές Ερωτήσεις">FAQ</Link>
+            <Link to="/about-us" className="top-link" aria-label="Σχετικά με Εμάς">About Us</Link>
+        </div>
         <img src={logo} alt="Logo" className='home-logo'/>
        <div className="buttons-container">
         <h1 className='header-text'>Καλώς ήρθατε στις Νταντάδες της Γειτονιάς!</h1>
