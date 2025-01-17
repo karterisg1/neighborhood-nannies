@@ -9,7 +9,6 @@
 
 .booking-page h2{
     margin-bottom: 20px;
-    color: #0056b3;
 }
 .time-selection{
     margin-bottom: 20px;
@@ -26,6 +25,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  color: #333;
 }
 .time-selection .time-button.active,
 .time-selection .time-button:hover{
