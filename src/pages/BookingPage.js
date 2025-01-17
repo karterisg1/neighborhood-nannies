@@ -4,7 +4,8 @@ import './BookingPage.css';
 import Navbar from '../components/Navbar';
 import Calendar from '../components/Calendar';
 import { db, auth } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
 
 function BookingPage() {
     const { nannyId } = useParams();
@@ -27,21 +28,29 @@ function BookingPage() {
         setType(e.target.value);
     }
 
-    const handleBooking = async () => {
+   const handleBooking = async () => {
         if(!selectedDate || !selectedTime){
           setError('Παρακαλώ επιλέξτε ημερομηνία και ώρα.');
           return;
         }
          try {
-            const appointmentsCollection = collection(db, 'appointments');
-            await addDoc(appointmentsCollection, {
+           const appointmentsCollection = collection(db, 'appointments');
+            const appointmentDoc = await addDoc(appointmentsCollection, {
                 nannyId: nannyId,
                 userId: auth.currentUser.uid,
                 date: selectedDate.toISOString(),
                 time: selectedTime,
                 type: type,
-                status: 'pending'
+               status: 'pending'
            });
+             const notificationsCollection = collection(db, 'notifications');
+                await addDoc(notificationsCollection, {
+                   userId: nannyId,
+                   message: `A new booking request has been created by ${auth.currentUser.displayName} for the date ${selectedDate.toLocaleDateString('el-GR')} at ${selectedTime}`,
+                    type: 'new_appointment',
+                     createdAt: serverTimestamp(),
+                   appointmentId: appointmentDoc.id,
+             });
             navigate('/manage-appointments');
            }
          catch (error){
