@@ -41,7 +41,7 @@ function Navbar() {
            <Link to="/" aria-label="Go to Home">Νταντάδες της Γειτονιάς</Link>
          </div>
          <div className="navbar-links">
-          {currentUser && (
+         {currentUser ? (
               <>
                 {currentUser?.displayName && <span className='user-name'>Καλώς ήρθες, {currentUser.displayName}</span>}
                 {userRole === 'parent' && (
@@ -62,25 +62,24 @@ function Navbar() {
                     <Link to="/history" aria-label="Ιστορικό">Ιστορικό</Link>
                        <Link to="/vouchers" aria-label="Vouchers">Vouchers</Link>
                       <Link to='/notifications' aria-label="Ειδοποιήσεις">Notifications</Link>
-                      <Link to="/nanny-history" aria-label="Ιστορικό Συμβάσεων">My Contracts</Link>
+                    <Link to="/nanny-history" aria-label="Ιστορικό Συμβάσεων">My Contracts</Link>
                       <Link to='/settings' aria-label="Ρυθμίσεις">Settings</Link>
                    </>
                )}
                { currentUser?.email && currentUser?.email === 'admin@gmail.com' && <Link to='/admin-dashboard' aria-label="Πίνακας Ελέγχου Διαχειριστή">Admin</Link>}
                 <Link to='/help' aria-label="Βοήθεια">Help</Link>
-                <Link to='/messages/inbox' aria-label='Εισερχόμενα'>Inbox</Link>
-                <Link to='/messages/outbox' aria-label='Απεσταλμένα'>Outbox</Link>
+                  <Link to='/messages/inbox' aria-label='Εισερχόμενα'>Inbox</Link>
+                  <Link to='/messages/outbox' aria-label='Απεσταλμένα'>Outbox</Link>
                 <button onClick={handleLogout} aria-label="Αποσύνδεση">Αποσύνδεση</button>
               </>
-             )}
-             {!currentUser && (
+             ) : (
               <>
-                  <Link to="/eligibility" aria-label="Κριτήρια Επιλεξιμότητας">Eligibility</Link>
-                   <Link to="/how-it-works" aria-label="Πώς Λειτουργεί">How it works</Link>
-                    <Link to="/faq" aria-label="Συχνές Ερωτήσεις">FAQ</Link>
-                   <Link to="/about-us" aria-label="Σχετικά με Εμάς">About Us</Link>
+                <Link to="/eligibility" aria-label="Κριτήρια Επιλεξιμότητας">Eligibility</Link>
+                 <Link to="/how-it-works" aria-label="Πώς Λειτουργεί">How it works</Link>
+                 <Link to="/faq" aria-label="Συχνές Ερωτήσεις">FAQ</Link>
+                  <Link to="/about-us" aria-label="Σχετικά με Εμάς">About Us</Link>
               </>
-           )}
+            )}
          </div>
    </nav>
  );
