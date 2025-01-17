@@ -1,76 +1,83 @@
-.home-page{
+.home-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
-    text-align: center;
-    background-color: white;
+    gap: 10px;
+    margin-top: 20px; /* Reduced spacing */
 }
 
-.home-logo{
-    width: 200px;
-    margin-bottom: 20px;
+.home-buttons a{
+  text-decoration: none;
 }
-
-.header-text{
-    margin-bottom: 15px;
-    font-size: 2rem;
-    color: #0056b3;
-}
-.main-text{
-    margin-bottom: 30px;
-    font-size: 1.2rem;
-    color: #555;
-}
-
-.sections-wrapper {
-    display: flex;
-    justify-content: space-around;
-    width: 80%;
-    margin-bottom: 30px;
-}
-
-.home-section {
-    padding: 20px;
-    background-color: #e9ecef;
-    border-radius: 8px;
-    width: 40%;
-    text-align: left;
-}
-.section-header{
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #0056b3;
-}
-
-.home-section ul{
-   list-style-type: none;
-   padding-left: 10px;
-}
-
-.home-section ul li {
-    margin-bottom: 5px;
-}
-
-.home-buttons{
-    display: flex;
-    gap: 20px;
-}
-
 .register-button,
-.login-button {
-    padding: 15px 25px;
-    font-size: 1rem;
-    color: white;
-    background-color: #007bff;
-    border: none;
+.login-button,
+.eligibility-button {
+    padding: 10px 20px; /* Slightly larger padding */
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    width: fit-content;
     transition: background-color 0.3s ease;
 }
+.eligibility-button {
+    background-color: #28a745; /* Green for Eligibility */
+     color: #fff;
+}
+.eligibility-button:hover{
+      background-color: #1e7e34;
+}
+.register-button {
+  background-color: #007bff;
+  color: #fff;
+}
 
-.register-button:hover,
-.login-button:hover {
-    background-color: #0056b3;
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+.login-button {
+  background-color: #17a2b8;
+  color: #fff;
+}
+.login-button:hover{
+    background-color: #117a8b;
+}
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    min-height: 100vh; /* Ensure full viewport height */
+    text-align: center;
+}
+.header-text{
+  color:#0056b3;
+}
+.home-logo{
+  width: 200px;
+  height: auto;
+}
+.main-text{
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.sections-wrapper{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    gap: 30px;
+    margin-bottom: 20px;
+}
+.home-section{
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-header{
+  color:#0056b3;
 }
