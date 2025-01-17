@@ -48,7 +48,6 @@ import ParentProfilePage from './pages/ParentProfilePage';
 import './App.css';
 
 function App() {
-
   return (
     <AuthProvider>
       <Router>
@@ -72,6 +71,8 @@ function App() {
            <Route path="/edit-profile" element={<PrivateRoute><EditProfilePage /></PrivateRoute>} />
             <Route path='/eligibility' element={<EligibilityPage />} />
             <Route path='/how-it-works' element={<HowItWorksPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/about-us" element={<AboutUsPage />} />
              <Route path='/notifications' element={<PrivateRoute><NotificationsPage /></PrivateRoute>} />
            <Route path='/admin-dashboard' element={<PrivateRoute><AdminDashboardPage /></PrivateRoute>} />
              <Route path='/parent-dashboard' element={<PrivateRoute><ParentDashboardPage /></PrivateRoute>} />
@@ -91,9 +92,7 @@ function App() {
             <Route path='/reset-password' element={<PasswordResetPage />} />
             <Route path='/settings' element={<PrivateRoute><SettingsPage /></PrivateRoute>} />
           <Route path='/help' element={<HelpPage />} />
-         <Route path='/faq' element={<FAQPage />} />
-          <Route path='/about-us' element={<AboutUsPage />} />
-         <Route path='/nanny-vouchers' element={<PrivateRoute><NannyVoucherConfirmationPage /></PrivateRoute>}/>
+        <Route path='/nanny-vouchers' element={<PrivateRoute><NannyVoucherConfirmationPage /></PrivateRoute>}/>
           <Route path='/nanny-history' element={<PrivateRoute><NannyHistoryPage /></PrivateRoute>}/>
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/search-parents" element={<PrivateRoute><SearchParentsPage /></PrivateRoute>} />
@@ -103,7 +102,6 @@ function App() {
     </AuthProvider>
   );
 }
-
 function PrivateRoute({ children }) {
     const { currentUser } = React.useContext(AuthContext);
     return currentUser ? children : <Navigate to="/login" />;

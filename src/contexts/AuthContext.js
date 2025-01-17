@@ -61,9 +61,9 @@ export function AuthProvider({ children }) {
                email: email,
                role: role
            });
-            return { user, error: null };
+            return { user, role, error: null };
         } catch (error) {
-            return { user: null, error: error.message };
+            return { user: null, role: null, error: error.message };
         }
     };
 
@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
             }
           return { user: {...userCredential.user, role: null }, error: null };
       } catch (error) {
-            return {user: null, error: error.message };
+            return {user: null, role: null, error: error.message };
         }
     };
 
@@ -96,7 +96,7 @@ export function AuthProvider({ children }) {
            return {user: {...user, role: null}, error: null}
         } catch (error) {
             console.error('Error with Taxisnet login:', error);
-            return {user: null, error: "Failed to log in with taxisnet." };
+            return {user: null, role: null, error: "Failed to log in with taxisnet." };
        }
    };
 

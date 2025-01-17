@@ -14,13 +14,15 @@ function LoginPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-         const { user, error } = await login(email, password);
+         const { user, role, error } = await login(email, password);
         if(user){
-            if(user.role === 'parent'){
-                navigate('/search-nannies');
+            if(role === 'parent'){
+                navigate('/onboarding-parent');
             }
-            else {
-                navigate('/nanny-dashboard');
+            else if (role === 'nanny') {
+                navigate('/onboarding-nanny');
+            } else {
+              navigate('/search-nannies')
             }
 
         }

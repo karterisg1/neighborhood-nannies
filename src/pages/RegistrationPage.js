@@ -24,9 +24,9 @@ function RegistrationPage() {
       setError("Οι κωδικοί δεν ταιριάζουν.");
       return;
     }
-        const { user, error } = await register(email, password, firstName, lastName, role);
+       const { user, role: userRole, error: registerError } = await register(email, password, firstName, lastName, role);
         if(user){
-           if (role === 'nanny') {
+           if (userRole === 'nanny') {
                try {
                   const nanniesCollection = collection(db, 'nannies');
                    await addDoc(nanniesCollection, {
@@ -35,21 +35,21 @@ function RegistrationPage() {
                        email: email,
                    });
                    const userRef = doc(db, 'users', user.uid);
-                   await setDoc(userRef, { firstName: firstName, lastName: lastName, email: email, role: role});
+                   await setDoc(userRef, { firstName: firstName, lastName: lastName, email: email, role: userRole});
                } catch (err) {
                  console.error("Error creating nanny profile:", err);
                  setError('Failed to create nanny profile, please try again later.');
                 return;
              }
-             navigate('/nanny-dashboard');
+             navigate('/onboarding-nanny');
           }
            else {
                const userRef = doc(db, 'users', user.uid);
-               await setDoc(userRef, { firstName: firstName, lastName: lastName, email: email, role: role});
-              navigate('/search-nannies');
+               await setDoc(userRef, { firstName: firstName, lastName: lastName, email: email, role: userRole});
+              navigate('/onboarding-parent');
             }
-         } else if (error) {
-            setError(error);
+         } else if (registerError) {
+            setError(registerError);
          }
   };
 
