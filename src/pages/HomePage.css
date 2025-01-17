@@ -197,6 +197,15 @@ a {
     background-color: #d4edda; /* Light Green background */
     border-radius: 5px;
 }
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
 
 .top-links {
     display: flex;
@@ -209,11 +218,82 @@ a {
    text-decoration: none;
      color: #007bff;
       transition: color 0.3s ease;
+       padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 .top-link:hover{
     color: #0056b3;
+    background-color: #f0f4f7;
 }
+
+.home-main {
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+     box-sizing: border-box;
+}
+
+
+.home-logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 15px;
+}
+.hero{
+   margin-bottom: 30px;
+}
+.header-text {
+    font-size: 2.2rem;
+    color: #0056b3; /* Use your primary color */
+    margin-bottom: 15px;
+}
+
+
+.main-text {
+    font-size: 1.1rem;
+    color: #495057; /* Dark Gray */
+    margin-bottom: 20px;
+    max-width: 700px;
+    line-height: 1.6;
+}
+
+.sections-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+
+.home-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+     box-sizing: border-box;
+}
+.home-section ul{
+      padding-left: 20px;
+      margin-top: 10px;
+      line-height: 1.7;
+}
+.section-header {
+    color: #0056b3;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
 .home-buttons {
     display: flex;
     flex-direction: column;
@@ -222,13 +302,13 @@ a {
     margin-top: 20px; /* Reduced spacing */
 }
 
-.home-buttons a{
-  text-decoration: none;
+.home-buttons a {
+    text-decoration: none;
 }
 .register-button,
 .login-button,
 .eligibility-button {
-    padding: 10px 20px; /* Slightly larger padding */
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -238,7 +318,7 @@ a {
     transition: background-color 0.3s ease;
 }
 .eligibility-button {
-    background-color: #28a745; /* Green for Eligibility */
+    background-color: #28a745;
      color: #fff;
 }
 .eligibility-button:hover{
@@ -259,41 +339,4 @@ a {
 }
 .login-button:hover{
     background-color: #117a8b;
-}
-
-.home-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Center vertically */
-    min-height: 100vh; /* Ensure full viewport height */
-    text-align: center;
-}
-.header-text{
-  color:#0056b3;
-}
-.home-logo{
-  width: 200px;
-  height: auto;
-}
-.main-text{
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-.sections-wrapper{
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    gap: 30px;
-    margin-bottom: 20px;
-}
-.home-section{
-    flex: 1;
-    background-color: #fff;
-    padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.section-header{
-  color:#0056b3;
 }
